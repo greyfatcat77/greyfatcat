@@ -1023,6 +1023,82 @@
         width: calc(100% - 32px);
       }
     }
+    /* Custom cursor */
+    *,
+    *::before,
+    *::after {
+      cursor: none !important;
+    }
+
+    .custom-cursor {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 16px;
+      height: 16px;
+      pointer-events: none;
+      z-index: 99999;
+      transform: translate(-50%, -50%);
+      transition: transform 0.1s ease;
+    }
+
+    .custom-cursor img {
+      width: 16px;
+      height: 16px;
+      display: block;
+      filter: invert(24%) sepia(89%) saturate(1567%) hue-rotate(211deg) brightness(89%) contrast(96%);
+    }
+
+    .custom-cursor.is-hovering img {
+      animation: rotate-once 0.4s ease forwards;
+    }
+
+    @keyframes rotate-once {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .flower-particle {
+      position: fixed;
+      pointer-events: none;
+      z-index: 99998;
+      transform: translate(-50%, -50%);
+      animation: flower-fall 1.8s ease-out forwards;
+    }
+
+    .flower-particle img {
+      filter: invert(24%) sepia(89%) saturate(1567%) hue-rotate(211deg) brightness(89%) contrast(96%);
+      display: block;
+    }
+
+    .flower-particle.size-large img {
+      width: 16px;
+      height: 16px;
+    }
+
+    .flower-particle.size-small img {
+      width: 8px;
+      height: 8px;
+    }
+
+    .flower-particle.size-medium img {
+      width: 12px;
+      height: 12px;
+    }
+
+    @keyframes flower-fall {
+      0% {
+        opacity: 1;
+        transform: translate(-50%, -50%) rotate(0deg);
+      }
+      70% {
+        opacity: 0.8;
+      }
+      100% {
+        opacity: 0;
+        transform: translate(-50%, 80px) rotate(240deg);
+      }
+    }
   </style>
 </head>
 <body id="top">
@@ -1342,6 +1418,68 @@
         input.focus();
       });
     })();
+  </script>
+  <script>
+    const cursor = document.createElement('div');
+    cursor.classList.add('custom-cursor');
+    cursor.innerHTML = '<img src="../assets/thumbnails/pointer.svg" alt="">';
+    document.body.appendChild(cursor);
+
+    document.addEventListener('mousemove', (e) => {
+      cursor.style.left = e.clientX + 'px';
+      cursor.style.top = e.clientY + 'px';
+    });
+
+    const interactiveElements = document.querySelectorAll(
+      'a, button, .card, [onclick], input, label'
+    );
+
+    interactiveElements.forEach(el => {
+      el.addEventListener('mouseenter', () => {
+        cursor.classList.add('is-hovering');
+      });
+      el.addEventListener('mouseleave', () => {
+        cursor.classList.remove('is-hovering');
+        void cursor.querySelector('img').offsetWidth;
+      });
+    });
+
+    function spawnFlowers(e) {
+      if (e.flowerDropHandled) return;
+      e.flowerDropHandled = true;
+
+      const flowers = [
+        { size: 'size-large', offsetX: -20, offsetY: 0, delay: 0 },
+        { size: 'size-small', offsetX: 20, offsetY: -8, delay: 300 },
+        { size: 'size-medium', offsetX: 0, offsetY: -4, delay: 600 }
+      ];
+
+      flowers.forEach((flower) => {
+        setTimeout(() => {
+          const particle = document.createElement('div');
+          particle.classList.add('flower-particle', flower.size);
+
+          const imgSrc = document.querySelector('.custom-cursor img').src;
+          particle.innerHTML = '<img src="' + imgSrc + '" alt="">';
+
+          particle.style.left = (e.clientX + flower.offsetX) + 'px';
+          particle.style.top = (e.clientY + flower.offsetY) + 'px';
+
+          document.body.appendChild(particle);
+
+          setTimeout(() => {
+            particle.remove();
+          }, 1800);
+
+        }, flower.delay);
+      });
+    }
+
+    document.addEventListener('click', spawnFlowers);
+
+    interactiveElements.forEach(el => {
+      el.addEventListener('click', spawnFlowers);
+    });
   </script>
 </body>
 </html>
