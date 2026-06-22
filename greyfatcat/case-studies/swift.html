@@ -1,0 +1,1347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SWIFT Transfer Journey — Jessica K</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --color-bg: #FFFFFF;
+      --color-primary: #1D56CF;
+      --color-text: #0D0D0D;
+      --color-muted: #AEABA5;
+      --color-separator: #C2C2C2;
+      --color-input-bg: #F5F5F5;
+      --color-box-bg: #F5F5F5;
+
+      --font-family: 'Inter', sans-serif;
+
+      --font-weight-light: 300;
+      --font-weight-regular: 400;
+      --font-weight-medium: 500;
+      --font-weight-bold: 600;
+
+      --page-width: 1440px;
+      --content-width: 680px;
+      --nav-height: 60px;
+      --footer-height: 72px;
+      --nav-padding-outer: 120px;
+      --nav-padding-inner: 60px;
+      --content-padding: 72px 0px;
+      --gap-section: 60px;
+      --gap-internal: 32px;
+      --gap-meta: 32px;
+      --gap-nav-links: 32px;
+      --footer-link-gap: 16px;
+
+      --separator: 1px solid #C2C2C2;
+      --logo-letter-spacing: 0.2em;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-family);
+      background-color: var(--color-bg);
+      color: var(--color-text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .is-hidden {
+      display: none !important;
+    }
+
+    .page {
+      max-width: var(--page-width);
+      margin: 0 auto;
+      background-color: var(--color-bg);
+      width: 100%;
+    }
+
+    /* Navigation */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      width: 100%;
+      height: var(--nav-height);
+      background-color: var(--color-bg);
+      border-bottom: var(--separator);
+    }
+
+    .nav__outer {
+      max-width: var(--page-width);
+      margin: 0 auto;
+      height: 100%;
+      padding: 0 var(--nav-padding-outer);
+    }
+
+    .nav__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 100%;
+      padding: 0 var(--nav-padding-inner);
+    }
+
+    .nav__logo {
+      font-size: 18px;
+      font-weight: var(--font-weight-medium);
+      letter-spacing: var(--logo-letter-spacing);
+      text-transform: uppercase;
+      color: var(--color-primary);
+      line-height: 1;
+    }
+
+    .nav__links {
+      display: flex;
+      align-items: center;
+      gap: var(--gap-nav-links);
+      list-style: none;
+    }
+
+    .nav__links a {
+      font-size: 14px;
+      font-weight: var(--font-weight-regular);
+      line-height: 17px;
+      color: var(--color-text);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .nav__links a:hover {
+      color: var(--color-muted);
+    }
+
+    .nav__links a.nav__link--active {
+      color: var(--color-primary);
+      text-decoration: underline;
+    }
+
+    /* Password gate */
+    .password-gate {
+      flex: 1;
+      width: 100%;
+      max-width: var(--page-width);
+      margin: 0 auto;
+    }
+
+    .password-gate__shell {
+      width: var(--content-width);
+      max-width: calc(100% - 48px);
+      margin: 0 auto;
+      padding: var(--content-padding);
+      padding-bottom: 0;
+      min-height: calc(100vh - var(--nav-height) - var(--footer-height));
+      display: flex;
+      flex-direction: column;
+    }
+
+    .password-gate__center {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .password-gate__inner {
+      width: 668px;
+      max-width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 32px;
+    }
+
+    .password-gate__avatar {
+      width: 106px;
+      height: 106px;
+      border-radius: 75.7143px;
+      object-fit: cover;
+    }
+
+    .password-gate__texts {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      width: 100%;
+    }
+
+    .password-gate__title {
+      font-size: 40px;
+      font-weight: var(--font-weight-light);
+      line-height: 48px;
+      color: var(--color-primary);
+      text-align: center;
+    }
+
+    .password-gate__subtext {
+      font-size: 24px;
+      font-weight: var(--font-weight-light);
+      line-height: 32px;
+      color: var(--color-text);
+      text-align: center;
+    }
+
+    .password-gate__form-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+    }
+
+    .password-gate__form {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      gap: 16px;
+      width: 446px;
+      max-width: 100%;
+    }
+
+    .password-gate__field-group {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      width: 350px;
+      max-width: 100%;
+      flex-shrink: 1;
+    }
+
+    .password-gate__input-wrap {
+      position: relative;
+      width: 100%;
+      height: 42px;
+    }
+
+    .password-gate__input {
+      width: 100%;
+      height: 42px;
+      padding: 0 44px 0 16px;
+      border-radius: 8px;
+      font-family: var(--font-family);
+      font-size: 14px;
+      font-weight: var(--font-weight-regular);
+      color: var(--color-text);
+      outline: none;
+      box-sizing: border-box;
+      background: #F5F5F5;
+      border: 1px solid #1D56CF;
+      transition: background 0.2s ease, border 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .password-gate__input:disabled {
+      background: #F0F0F0;
+      border: 1px solid #C7C7C7;
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .password-gate__input:focus,
+    .password-gate__input-wrap.is-focused:not(.is-error) .password-gate__input {
+      background: #FFFFFF;
+      border: 2px solid #1D56CF;
+      box-shadow: 0px 0px 0px 3px rgba(29, 86, 207, 0.25);
+    }
+
+    .password-gate__input-wrap.is-filled:not(.is-error):not(.is-focused) .password-gate__input {
+      background: #FFFFFF;
+      border: 1px solid #808080;
+      box-shadow: none;
+    }
+
+    .password-gate__input-wrap.is-error .password-gate__input {
+      background: #FFF3F3;
+      border: 1.5px solid #DD3232;
+      box-shadow: none;
+    }
+
+    .password-gate__toggle {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 18px;
+      height: 18px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #666666;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      transition: color 0.2s ease;
+    }
+
+    .password-gate__input:focus + .password-gate__toggle,
+    .password-gate__input-wrap.is-focused:not(.is-error) .password-gate__toggle {
+      color: #1D56CF;
+    }
+
+    .password-gate__input-wrap.is-filled:not(.is-error):not(.is-focused) .password-gate__toggle {
+      color: #4D4D4D;
+    }
+
+    .password-gate__input-wrap.is-error .password-gate__toggle {
+      color: #DD3232;
+    }
+
+    .password-gate__input:disabled + .password-gate__toggle {
+      color: #C7C7C7;
+      cursor: not-allowed;
+      opacity: 0.5;
+    }
+
+    .password-gate__submit {
+      width: 80px;
+      height: 33px;
+      padding: 8px 16px;
+      margin-top: 4px;
+      background: none;
+      border: none;
+      font-family: var(--font-family);
+      font-size: 14px;
+      font-weight: var(--font-weight-regular);
+      color: var(--color-text);
+      cursor: pointer;
+      white-space: nowrap;
+      transition: color 0.2s ease;
+    }
+
+    .password-gate__submit:hover {
+      color: var(--color-muted);
+    }
+
+    .password-gate__error {
+      font-size: 12px;
+      font-weight: var(--font-weight-regular);
+      line-height: 15px;
+      color: #DE2B2B;
+      width: 100%;
+      text-align: left;
+    }
+
+    .password-gate__error:empty {
+      display: none;
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      20%, 60% { transform: translateX(-8px); }
+      40%, 80% { transform: translateX(8px); }
+    }
+
+    .password-gate__input-wrap.shake {
+      animation: shake 0.4s ease;
+    }
+
+    /* Case study layout */
+    .content {
+      width: var(--content-width);
+      max-width: calc(100% - 48px);
+      margin: 0 auto;
+      padding: var(--content-padding);
+      display: flex;
+      flex-direction: column;
+      gap: var(--gap-section);
+    }
+
+    .cs-hero {
+      display: flex;
+      flex-direction: column;
+      gap: var(--gap-internal);
+    }
+
+    .back-link {
+      font-size: 14px;
+      font-weight: var(--font-weight-regular);
+      line-height: 17px;
+      color: var(--color-primary);
+      align-self: flex-start;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .back-link:hover {
+      color: var(--color-muted);
+    }
+
+    .back-link:active {
+      color: var(--color-primary);
+    }
+
+    .tags {
+      font-size: 12px;
+      font-weight: var(--font-weight-regular);
+      line-height: 20px;
+      color: var(--color-primary);
+    }
+
+    .cs-title {
+      font-size: 40px;
+      font-weight: var(--font-weight-regular);
+      line-height: 48px;
+      color: var(--color-text);
+      width: 680px;
+      max-width: 100%;
+    }
+
+    .cs-intro {
+      display: block;
+      width: 680px;
+      max-width: 100%;
+      font-size: 16px;
+      font-weight: var(--font-weight-light);
+      line-height: 24px;
+      color: #0D0D0D;
+      margin: 0;
+    }
+
+    .cs-meta {
+      display: flex;
+      flex-direction: column;
+      gap: var(--gap-meta);
+    }
+
+    .cs-meta__row {
+      display: flex;
+      gap: var(--gap-meta);
+    }
+
+    .cs-meta__item {
+      width: 324px;
+      max-width: calc(50% - 16px);
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .cs-meta__label {
+      font-size: 16px;
+      font-weight: var(--font-weight-regular);
+      line-height: 24px;
+      color: var(--color-primary);
+    }
+
+    .cs-meta__value {
+      font-size: 16px;
+      font-weight: var(--font-weight-light);
+      line-height: 24px;
+      color: var(--color-text);
+    }
+
+    .outcome-box {
+      background: var(--color-box-bg);
+      border: 1px solid var(--color-primary);
+      border-radius: 16px;
+      padding: 24px;
+      width: 680px;
+      max-width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .outcome-box__label {
+      font-size: 16px;
+      font-weight: var(--font-weight-bold);
+      line-height: 32px;
+      color: var(--color-primary);
+    }
+
+    .outcome-box__text {
+      font-size: 16px;
+      font-weight: var(--font-weight-light);
+      line-height: 24px;
+      color: var(--color-text);
+    }
+
+    .outcome-box__text strong {
+      font-weight: var(--font-weight-bold);
+    }
+
+    .full-bleed {
+      width: 100%;
+      max-width: var(--page-width);
+      height: 720px;
+      object-fit: cover;
+      display: block;
+    }
+
+    #case-study > .full-bleed {
+      margin-top: var(--gap-section);
+    }
+
+    .full-bleed--spaced {
+      margin-top: var(--gap-section);
+    }
+
+    .full-bleed--gap-48 {
+      margin-top: 48px;
+    }
+
+    .cs-section,
+    .takeaways {
+      width: var(--content-width);
+      max-width: calc(100% - 48px);
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .full-bleed + .cs-section,
+    .full-bleed + .takeaways {
+      margin-top: 60px;
+    }
+
+    .cs-section__inner,
+    .takeaways__inner {
+      display: flex;
+      flex-direction: column;
+      gap: var(--gap-internal);
+    }
+
+    .cs-section__label {
+      font-size: 14px;
+      font-weight: var(--font-weight-bold);
+      line-height: 22px;
+      color: var(--color-primary);
+    }
+
+    .cs-section__heading {
+      font-size: 28px;
+      font-weight: var(--font-weight-regular);
+      line-height: 32px;
+      color: var(--color-text);
+    }
+
+    .cs-body {
+      font-size: 16px;
+      font-weight: var(--font-weight-light);
+      line-height: 24px;
+      color: var(--color-text);
+    }
+
+    .cs-body p,
+    .cs-body li {
+      font-size: 16px;
+      line-height: 24px;
+    }
+
+    .cs-body p + p {
+      margin-top: 16px;
+    }
+
+    .swift-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .swift-list li {
+      font-size: 16px;
+      font-weight: var(--font-weight-light);
+      line-height: 24px;
+      color: #0D0D0D;
+      padding-left: 16px;
+      position: relative;
+    }
+
+    .swift-list li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: #0D0D0D;
+    }
+
+    .swift-list li strong {
+      font-weight: var(--font-weight-bold);
+    }
+
+    .cs-figure {
+      width: 680px;
+      max-width: 100%;
+    }
+
+    .cs-figure__image {
+      width: 680px;
+      max-width: 100%;
+      height: auto;
+      object-fit: contain;
+      display: block;
+    }
+
+    .cs-figure__caption {
+      font-size: 12px;
+      font-weight: var(--font-weight-light);
+      line-height: 18px;
+      color: var(--color-text);
+      text-align: right;
+      margin-top: 8px;
+    }
+
+    .comparison-table {
+      width: 680px;
+      max-width: 100%;
+      border-collapse: collapse;
+    }
+
+    .comparison-table th {
+      font-size: 12px;
+      font-weight: var(--font-weight-regular);
+      line-height: 20px;
+      color: var(--color-primary);
+      text-align: left;
+      padding: 0 0 8px;
+      border-bottom: 3px solid var(--color-primary);
+    }
+
+    .comparison-table th:last-child {
+      padding-left: 16px;
+    }
+
+    .comparison-table td {
+      font-size: 14px;
+      line-height: 24px;
+      color: #0D0D0D;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--color-separator);
+      vertical-align: top;
+    }
+
+    .comparison-table td:first-child {
+      font-weight: var(--font-weight-bold);
+    }
+
+    .comparison-table td:last-child {
+      font-weight: var(--font-weight-light);
+      padding-left: 16px;
+    }
+
+    .comparison-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .solution-highlight {
+      font-size: 20px;
+      font-weight: var(--font-weight-bold);
+      line-height: 24px;
+      color: var(--color-primary);
+    }
+
+    .solution-sublabel {
+      font-size: 14px;
+      font-weight: var(--font-weight-bold);
+      line-height: 24px;
+      color: var(--color-primary);
+    }
+
+    .cs-separator {
+      border: none;
+      border-top: 1px solid var(--color-separator);
+      width: 680px;
+      max-width: 100%;
+      margin: 60px auto;
+    }
+
+    .info-box {
+      background: var(--color-box-bg);
+      border: 1px solid var(--color-primary);
+      border-radius: 16px;
+      padding: 24px;
+      width: 680px;
+      max-width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .info-box__title {
+      font-size: 16px;
+      font-weight: var(--font-weight-bold);
+      line-height: 32px;
+      color: var(--color-primary);
+    }
+
+    .info-box__lines {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .info-box__line {
+      font-size: 16px;
+      font-weight: var(--font-weight-light);
+      line-height: 24px;
+      color: #0D0D0D;
+      margin: 0;
+    }
+
+    .takeaways {
+      padding-bottom: 72px;
+    }
+
+    /* Footer */
+    .footer {
+      height: var(--footer-height);
+      background-color: var(--color-bg);
+      margin-top: auto;
+      width: 100%;
+    }
+
+    .footer__inner {
+      width: var(--content-width);
+      max-width: calc(100% - 48px);
+      height: 100%;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .footer__left {
+      display: flex;
+      align-items: center;
+      gap: var(--footer-link-gap);
+    }
+
+    .footer__back-to-top {
+      font-size: 14px;
+      font-weight: var(--font-weight-regular);
+      line-height: 17px;
+      color: var(--color-text);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .footer__back-to-top:hover {
+      color: var(--color-muted);
+    }
+
+    .footer__back-to-top:active {
+      color: var(--color-primary);
+    }
+
+    .footer__link {
+      font-size: 14px;
+      font-weight: var(--font-weight-regular);
+      line-height: 17px;
+      color: var(--color-text);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .footer__link:hover {
+      color: var(--color-muted);
+    }
+
+    .footer__link:active {
+      color: var(--color-primary);
+      text-decoration: underline;
+    }
+
+    .footer__copyright {
+      font-size: 12px;
+      font-weight: var(--font-weight-regular);
+      line-height: 20px;
+      color: var(--color-muted);
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      :root {
+        --nav-padding-outer: 48px;
+        --nav-padding-inner: 24px;
+      }
+
+      .content,
+      .cs-section,
+      .cs-caption,
+      .password-gate__shell {
+        width: calc(100% - 96px);
+        max-width: 680px;
+      }
+
+      .footer__inner {
+        width: calc(100% - 96px);
+        max-width: 680px;
+      }
+
+      .full-bleed {
+        width: 100vw;
+        max-width: none;
+        position: relative;
+        left: 50%;
+        transform: translateX(-50%);
+        height: 500px;
+        object-fit: cover;
+      }
+    }
+
+    @media (max-width: 768px) {
+      :root {
+        --nav-padding-outer: 24px;
+        --nav-padding-inner: 0px;
+        --gap-nav-links: 8px;
+        --gap-section: 40px;
+      }
+
+      .nav__logo {
+        font-size: 14px;
+      }
+
+      .nav__links {
+        gap: 8px;
+      }
+
+      .nav__links a {
+        font-size: 12px;
+      }
+
+      .content,
+      .cs-section,
+      .cs-caption,
+      .password-gate__shell {
+        width: calc(100% - 48px);
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .back-link {
+        align-self: flex-start;
+      }
+
+      .tags {
+        white-space: normal;
+      }
+
+      .cs-title {
+        font-size: 28px;
+        line-height: 36px;
+        width: 100%;
+        max-width: 100%;
+      }
+
+      .cs-intro,
+      .cs-body,
+      .cs-body p,
+      .cs-body li,
+      .feature-item__desc,
+      .persona-card__list li,
+      .solution-card__body,
+      .insight-card__body,
+      .game-card__body,
+      .outcome-box__text,
+      .outcome-box__list li {
+        font-size: 15px;
+        line-height: 24px;
+      }
+
+      .cs-intro {
+        width: 100%;
+        max-width: 100%;
+      }
+
+      .cs-meta {
+        gap: 24px;
+      }
+
+      .cs-meta__row {
+        flex-direction: column;
+        gap: 24px;
+      }
+
+      .cs-meta__item {
+        width: 100%;
+        max-width: 100%;
+      }
+
+      .cs-section__heading {
+        font-size: 22px;
+        line-height: 28px;
+      }
+
+      .outcome-box {
+        width: 100%;
+        max-width: 100%;
+        padding: 20px;
+      }
+
+      .full-bleed {
+        width: 100vw;
+        margin-left: calc(-50vw + 50%);
+        left: auto;
+        transform: none;
+        height: 300px;
+        object-fit: cover;
+      }
+
+      .insight-grid,
+      .solution-grid,
+      .game-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .persona-card {
+        width: 100%;
+        max-width: 100%;
+      }
+
+      .feature-list,
+      .problem-list {
+        width: 100%;
+      }
+
+      .ia-blocks {
+        flex-direction: column;
+      }
+
+      .cs-separator {
+        margin: 32px auto;
+      }
+
+      .full-bleed + .cs-section {
+        margin-top: 40px;
+      }
+
+      .solution-block--padded,
+      .solution-block--section-padded {
+        padding: 0;
+      }
+
+      .comparison-table {
+        display: block;
+        overflow-x: auto;
+        width: 100%;
+      }
+
+      .footer__inner {
+        width: 100%;
+        padding: 0 24px;
+      }
+
+      .password-gate__inner {
+        width: calc(100% - 48px);
+        max-width: 100%;
+        margin: 0 auto;
+      }
+
+      .password-gate__title {
+        font-size: 24px;
+        line-height: 32px;
+      }
+
+      .password-gate__subtext {
+        font-size: 16px;
+        line-height: 24px;
+      }
+
+      .password-gate__form {
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        width: 100%;
+      }
+
+      .password-gate__field-group {
+        flex: 1;
+        min-width: 0;
+        width: 100%;
+        max-width: 300px;
+      }
+
+      .password-gate__input-wrap,
+      .password-gate__input {
+        width: 100%;
+      }
+
+      .password-gate__submit {
+        margin-top: 4px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      :root {
+        --logo-letter-spacing: 0.1em;
+      }
+
+      .nav__logo {
+        font-size: 13px;
+      }
+
+      .nav__links a {
+        font-size: 11px;
+      }
+
+      .content,
+      .cs-section,
+      .cs-caption,
+      .password-gate__shell {
+        width: calc(100% - 32px);
+      }
+
+      .cs-title {
+        font-size: 24px;
+        line-height: 32px;
+      }
+
+      .cs-section__heading {
+        font-size: 20px;
+        line-height: 26px;
+      }
+
+      .full-bleed {
+        height: 240px;
+      }
+
+      .footer__inner {
+        width: calc(100% - 32px);
+      }
+    }
+  </style>
+</head>
+<body id="top">
+  <header class="nav">
+    <div class="nav__outer">
+      <div class="nav__inner">
+        <a href="../index.html" class="nav__logo">Jessica K</a>
+        <ul class="nav__links">
+          <li><a href="../index.html" class="nav__link--active">works</a></li>
+          <li><a href="../about.html">about</a></li>
+          <li><a href="https://www.linkedin.com/in/jessicakr/" target="_blank" rel="noopener noreferrer">linkedin</a></li>
+        </ul>
+      </div>
+    </div>
+  </header>
+
+  <div class="password-gate" id="password-gate">
+    <div class="password-gate__shell">
+      <a href="../index.html" class="back-link">&larr; home</a>
+      <div class="password-gate__center">
+        <div class="password-gate__inner">
+      <img src="../assets/thumbnails/password-cat.png" alt="" class="password-gate__avatar">
+      <div class="password-gate__texts">
+        <h1 class="password-gate__title">This page is password protected.</h1>
+        <p class="password-gate__subtext">Please key in the password below</p>
+      </div>
+      <div class="password-gate__form-wrap">
+        <form class="password-gate__form" id="password-form">
+          <div class="password-gate__field-group">
+            <div class="password-gate__input-wrap" id="password-input-wrap">
+              <input
+                type="password"
+                id="password-input"
+                class="password-gate__input"
+                autocomplete="current-password"
+                aria-label="Password"
+                aria-describedby="password-error"
+              >
+              <button type="button" class="password-gate__toggle" id="password-toggle" aria-label="Show password">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <path d="M17.94 17.94C16.22 19.24 14.18 20 12 20C5 20 1 12 1 12C2.24 9.36 4.07 7.17 6.29 5.71M9.9 4.24C10.57 4.08 11.28 4 12 4C19 4 23 12 23 12C22.43 13.36 21.62 14.58 20.71 15.65M14.12 14.12C13.79 14.45 13.42 14.71 13 14.89M9.88 9.88C9.55 10.21 9.29 10.58 9.11 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  <line x1="1" y1="1" x2="23" y2="23" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+              </button>
+            </div>
+            <p class="password-gate__error" id="password-error" role="alert"></p>
+          </div>
+          <button type="submit" class="password-gate__submit">Submit</button>
+        </form>
+      </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page is-hidden" id="case-study">
+    <div class="content">
+      <a href="../index.html" class="back-link">&larr; home</a>
+      <div class="cs-hero">
+        <p class="tags">ui/ux design &bull; international transfer &bull; business banking</p>
+        <h1 class="cs-title">Redesigning Bank Search on SWIFT Transfer Journey</h1>
+        <p class="cs-intro">While designing the SWIFT international transfer flow for business banking | EasyBiz platform, I identified a usability issue in how users were expected to find their recipient's bank. Recognising the potential impact on task completion, I proposed new direction with more user centered solution. This became an opportunity to balance business requirements with real user needs, ultimately improving the efficiency of the SWIFT transfer experience.</p>
+
+        <div class="cs-meta">
+          <div class="cs-meta__row">
+            <div class="cs-meta__item">
+              <span class="cs-meta__label">Client</span>
+              <span class="cs-meta__value">EastWest Bank Business Banking | EasyBiz</span>
+            </div>
+            <div class="cs-meta__item">
+              <span class="cs-meta__label">My role</span>
+              <span class="cs-meta__value">UX Designer (sole designer)</span>
+            </div>
+          </div>
+          <div class="cs-meta__row">
+            <div class="cs-meta__item">
+              <span class="cs-meta__label">Platform</span>
+              <span class="cs-meta__value">Web (case study is focusing on web platform) and mobile (iOS &amp; Android)</span>
+            </div>
+            <div class="cs-meta__item">
+              <span class="cs-meta__label">Timeline</span>
+              <span class="cs-meta__value">2026 - in development</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="outcome-box">
+          <p class="outcome-box__label">🌟 Outcome</p>
+          <p class="outcome-box__text">&bull; Redesigned the original client requirement and proposed a better structured search sequence. <strong>Result:</strong> cleaner and more accurate bank selection experience for the SWIFT transfer.</p>
+        </div>
+      </div>
+    </div>
+
+    <img src="../assets/case-studies/swift/swift-hero.png" alt="SWIFT transfer journey mockups on laptop and mobile" class="full-bleed">
+
+    <section class="cs-section">
+      <div class="cs-section__inner">
+        <p class="cs-section__label">01 background/problem.</p>
+        <h2 class="cs-section__heading">Searching first by the bank name creates ambiguity</h2>
+        <div class="cs-body">
+          <p>The client's original requirement asked users to search for their recipient's bank using either a bank name or a SWIFT code as the first primary input.</p>
+          <p>This breaks down for large international banks. For an example Standard Chartered operates in over 50 countries and each with its own SWIFT code. Searching by bank name returns a long, undifferentiated list. A user sending money to Singapore and a user sending to South Korea would see the same bank name appear multiple times.</p>
+        </div>
+        <ul class="swift-list">
+          <li>Standard Chartered Singapore: <strong>SCBLSG22</strong></li>
+          <li>Standard Chartered South Korea: <strong>SCBLKRSE</strong></li>
+          <li>Standard Chartered South Africa: <strong>SCBLZAJJ</strong></li>
+          <li>Standard Chartered Philippines: <strong>SCBLPHMM</strong></li>
+        </ul>
+        <div class="cs-body">
+          <p>The only differentiator is the country code buried inside the SWIFT string, an information most users won't recognise. In an international transfer, selecting the wrong branch means funds sent to the wrong destination.</p>
+        </div>
+      </div>
+      <hr class="cs-separator">
+    </section>
+
+    <section class="cs-section">
+      <div class="cs-section__inner">
+        <p class="cs-section__label">02 understanding problems.</p>
+        <h2 class="cs-section__heading">How SWIFT codes are structured</h2>
+        <div class="cs-body">
+          <p>Before proposing the solution, I mapped out how SWIFT codes actually work. A SWIFT code has four parts:</p>
+        </div>
+        <figure class="cs-figure">
+          <img src="../assets/case-studies/swift/swift-structure.png" alt="Diagram showing SWIFT code structure: bank code, country code, location code, branch code" class="cs-figure__image">
+          <figcaption class="cs-figure__caption">Image source: https://www.worldfirst.com/uk/help-support/iban-versus-swift-code/</figcaption>
+        </figure>
+        <div class="cs-body">
+          <p>Country is the second element in the code and the most meaningful filter for users initiating an international transfer. (With the assumption) users mostly will know which country they're sending to. They may not know the complete exact bank name, and they almost certainly don't know the SWIFT code upfront.</p>
+        </div>
+      </div>
+      <hr class="cs-separator">
+    </section>
+
+    <section class="cs-section">
+      <div class="cs-section__inner">
+        <p class="cs-section__label">03 user research: competitive analysis.</p>
+        <h2 class="cs-section__heading">How other banking platforms handle this</h2>
+        <div class="cs-body">
+          <p>I reviewed how DBS, UOB, and Revolut handle the same flow. No formal usability study was available — the project timeline didn't allow for it. But the pattern across platforms was consistent enough to make a case.</p>
+        </div>
+        <table class="comparison-table">
+          <thead>
+            <tr>
+              <th scope="col">Platform</th>
+              <th scope="col">Search sequence</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>DBS</td>
+              <td>Country &rarr; Bank name &rarr; Branch</td>
+            </tr>
+            <tr>
+              <td>UOB</td>
+              <td>Country &rarr; Bank name &rarr; Account details</td>
+            </tr>
+            <tr>
+              <td>Revolut</td>
+              <td>Country &rarr; Bank details</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="cs-body">
+          <p>Country is always the first filter, across every platform reviewed. Combined with the structural logic of SWIFT codes. With this and the Standard Chartered SWIFT code example, this made a strong enough case to mention to the client.</p>
+        </div>
+      </div>
+      <hr class="cs-separator">
+    </section>
+
+    <section class="cs-section">
+      <div class="cs-section__inner">
+        <p class="cs-section__label">04 solution.</p>
+        <h2 class="cs-section__heading">Country first, then bank name</h2>
+        <div class="cs-body">
+          <p>I proposed to change the search sequence to mirror how users naturally think about an international transfer: country first then bank name to follow.</p>
+        </div>
+        <p class="solution-highlight">Country &rarr; Bank name (filtered) &rarr; Branch + account details</p>
+        <div class="cs-body">
+          <p>Once a country is selected, the bank name field filters to institutions registered in that country only, reducing the list and eliminating cross-country duplicates. The core team (BA and SA) discussed this ideation of the SWIFT code structure and the competitive examples. The change was accepted by the team.</p>
+        </div>
+        <p class="solution-sublabel">original design / flow of SWIFT for fields &darr;</p>
+      </div>
+    </section>
+
+    <img src="../assets/case-studies/swift/swift-solution1.png" alt="Original SWIFT transfer form design with annotated fields" class="full-bleed full-bleed--spaced">
+
+    <section class="cs-section">
+      <div class="cs-section__inner">
+        <p class="cs-section__label">05 design.</p>
+        <h2 class="cs-section__heading">The redesigned form</h2>
+        <div class="cs-body">
+          <p>The "Transfer to" section opens with a country selector as the first input. Bank name and branch fields follow, progressively revealed as the user narrows down.</p>
+        </div>
+      </div>
+    </section>
+
+    <img src="../assets/case-studies/swift/swift-solution2.png" alt="Redesigned SWIFT form step 1 and step 2 side by side" class="full-bleed full-bleed--spaced">
+
+    <img src="../assets/case-studies/swift/swift-solution3.png" alt="Bank name dropdown filtered by selected country" class="full-bleed full-bleed--gap-48">
+
+    <section class="cs-section takeaways">
+      <div class="takeaways__inner">
+        <p class="cs-section__label">06 key takeaways.</p>
+        <div class="cs-body">
+          <p>The redesigned flow is currently in development (2026 Q2). The client initially pushed back on the proposal. Their original approach was based on the assumption that users could search using any part of the SWIFT code structure, including country, bank, and branch information.</p>
+          <p>I presented the proposed solution alongside the Business Analyst, supported by competitive benchmarking and a breakdown of the search behaviour.</p>
+        </div>
+        <div class="info-box">
+          <p class="info-box__title">Impact</p>
+          <div class="info-box__lines">
+            <p class="info-box__line">🌟 Improved search accuracy by limiting results to banks within the selected country</p>
+            <p class="info-box__line">🌟 Reduced the risk of selecting the wrong bank or branch, particularly for global institutions with similar names</p>
+            <p class="info-box__line">🌟 Lowered users' cognitive load by replacing a broad global search with a more narrow lookup process</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <footer class="footer">
+    <div class="footer__inner">
+      <div class="footer__left">
+        <a href="#" class="footer__back-to-top" aria-label="Back to top" onclick="window.scrollTo({ top: 0, behavior: 'smooth' }); return false;">&uarr;</a>
+        <a href="https://www.linkedin.com/in/jessicakr/" class="footer__link" target="_blank" rel="noopener noreferrer">linkedin</a>
+      </div>
+      <p class="footer__copyright">&copy; 2026 Jessica Kr</p>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var PASSWORD = 'Coldstorage123';
+      var gate = document.getElementById('password-gate');
+      var caseStudy = document.getElementById('case-study');
+      var form = document.getElementById('password-form');
+      var input = document.getElementById('password-input');
+      var inputWrap = document.getElementById('password-input-wrap');
+      var toggle = document.getElementById('password-toggle');
+      var error = document.getElementById('password-error');
+
+      var eyeOn = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M1 12C1 12 5 4 12 4C19 4 23 12 23 12C23 12 19 20 12 20C5 20 1 12 1 12Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.5"/></svg>';
+      var eyeOff = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M17.94 17.94C16.22 19.24 14.18 20 12 20C5 20 1 12 1 12C2.24 9.36 4.07 7.17 6.29 5.71M9.9 4.24C10.57 4.08 11.28 4 12 4C19 4 23 12 23 12C22.43 13.36 21.62 14.58 20.71 15.65M14.12 14.12C13.79 14.45 13.42 14.71 13 14.89M9.88 9.88C9.55 10.21 9.29 10.58 9.11 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><line x1="1" y1="1" x2="23" y2="23" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>';
+
+      function clearError() {
+        error.textContent = '';
+        inputWrap.classList.remove('is-error');
+        input.setAttribute('aria-invalid', 'false');
+      }
+
+      function updateInputState() {
+        inputWrap.classList.remove('is-filled', 'is-focused');
+
+        if (input.disabled || inputWrap.classList.contains('is-error')) {
+          return;
+        }
+
+        if (document.activeElement === input) {
+          inputWrap.classList.add('is-focused');
+          return;
+        }
+
+        if (input.value.length > 0) {
+          inputWrap.classList.add('is-filled');
+        }
+      }
+
+      function setToggleIcon(isVisible) {
+        toggle.innerHTML = isVisible ? eyeOn : eyeOff;
+        toggle.setAttribute('aria-label', isVisible ? 'Hide password' : 'Show password');
+      }
+
+      setToggleIcon(false);
+
+      toggle.addEventListener('click', function () {
+        if (input.disabled) {
+          return;
+        }
+
+        var isVisible = input.type === 'password';
+        input.type = isVisible ? 'text' : 'password';
+        setToggleIcon(isVisible);
+      });
+
+      input.addEventListener('focus', function () {
+        updateInputState();
+      });
+
+      input.addEventListener('input', function () {
+        clearError();
+        updateInputState();
+      });
+
+      input.addEventListener('blur', function () {
+        inputWrap.classList.remove('is-focused');
+        updateInputState();
+      });
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        if (input.value === PASSWORD) {
+          gate.classList.add('is-hidden');
+          caseStudy.classList.remove('is-hidden');
+          window.scrollTo(0, 0);
+          return;
+        }
+
+        inputWrap.classList.remove('is-filled', 'is-focused');
+        inputWrap.classList.add('is-error');
+        input.setAttribute('aria-invalid', 'true');
+        error.textContent = 'Incorrect password';
+
+        inputWrap.classList.remove('shake');
+        void inputWrap.offsetWidth;
+        inputWrap.classList.add('shake');
+        input.focus();
+      });
+    })();
+  </script>
+</body>
+</html>

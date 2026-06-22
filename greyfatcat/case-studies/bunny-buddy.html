@@ -1,0 +1,1061 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bunny Buddy — Jessica K</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --color-bg: #FFFFFF;
+      --color-primary: #1D56CF;
+      --color-text: #0D0D0D;
+      --color-muted: #AEABA5;
+      --color-separator: #C2C2C2;
+      --color-box-bg: #F5F5F5;
+      --color-feature-number: #6E7A8E;
+      --color-feature-divider: #C2C2C2;
+
+      --font-family: 'Inter', sans-serif;
+
+      --font-weight-light: 300;
+      --font-weight-regular: 400;
+      --font-weight-medium: 500;
+      --font-weight-bold: 600;
+
+      --page-width: 1440px;
+      --content-width: 680px;
+      --nav-height: 60px;
+      --footer-height: 72px;
+      --nav-padding-outer: 120px;
+      --nav-padding-inner: 60px;
+      --content-padding: 72px 0px;
+      --gap-section: 60px;
+      --gap-internal: 32px;
+      --gap-meta: 32px;
+      --gap-nav-links: 32px;
+      --footer-link-gap: 16px;
+
+      --separator: 1px solid #C2C2C2;
+      --logo-letter-spacing: 0.2em;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-family);
+      background-color: var(--color-bg);
+      color: var(--color-text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page {
+      max-width: var(--page-width);
+      margin: 0 auto;
+      background-color: var(--color-bg);
+      width: 100%;
+    }
+
+    /* Navigation */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      width: 100%;
+      height: var(--nav-height);
+      background-color: var(--color-bg);
+      border-bottom: var(--separator);
+    }
+
+    .nav__outer {
+      max-width: var(--page-width);
+      margin: 0 auto;
+      height: 100%;
+      padding: 0 var(--nav-padding-outer);
+    }
+
+    .nav__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 100%;
+      padding: 0 var(--nav-padding-inner);
+    }
+
+    .nav__logo {
+      font-size: 18px;
+      font-weight: var(--font-weight-medium);
+      letter-spacing: var(--logo-letter-spacing);
+      text-transform: uppercase;
+      color: var(--color-primary);
+      line-height: 1;
+    }
+
+    .nav__links {
+      display: flex;
+      align-items: center;
+      gap: var(--gap-nav-links);
+      list-style: none;
+    }
+
+    .nav__links a {
+      font-size: 14px;
+      font-weight: var(--font-weight-regular);
+      line-height: 17px;
+      color: var(--color-text);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .nav__links a:hover {
+      color: var(--color-muted);
+    }
+
+    .nav__links a.nav__link--active {
+      color: var(--color-primary);
+      text-decoration: underline;
+    }
+
+    /* Case study layout */
+    .content {
+      width: var(--content-width);
+      max-width: calc(100% - 48px);
+      margin: 0 auto;
+      padding: 72px 0 0;
+      display: flex;
+      flex-direction: column;
+      gap: var(--gap-section);
+    }
+
+    .cs-hero {
+      display: flex;
+      flex-direction: column;
+      gap: var(--gap-internal);
+    }
+
+    .back-link {
+      font-size: 14px;
+      font-weight: var(--font-weight-regular);
+      color: var(--color-primary);
+      align-self: flex-start;
+      transition: color 0.2s ease;
+    }
+
+    .back-link:hover {
+      color: var(--color-muted);
+    }
+
+    .tags {
+      font-size: 12px;
+      font-weight: var(--font-weight-regular);
+      line-height: 20px;
+      color: var(--color-primary);
+    }
+
+    .cs-title {
+      font-size: 40px;
+      font-weight: var(--font-weight-regular);
+      line-height: 48px;
+      color: var(--color-text);
+      width: 680px;
+      max-width: 100%;
+    }
+
+    .cs-intro {
+      display: block;
+      width: 680px;
+      max-width: 100%;
+      font-size: 16px;
+      font-weight: var(--font-weight-light);
+      line-height: 24px;
+      color: #0D0D0D;
+      margin: 0;
+    }
+
+    .cs-meta {
+      display: flex;
+      flex-direction: column;
+      gap: var(--gap-meta);
+    }
+
+    .cs-meta__row {
+      display: flex;
+      gap: var(--gap-meta);
+    }
+
+    .cs-meta__item {
+      width: 324px;
+      max-width: calc(50% - 16px);
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .cs-meta__label {
+      font-size: 16px;
+      font-weight: var(--font-weight-regular);
+      line-height: 24px;
+      color: var(--color-primary);
+    }
+
+    .cs-meta__value {
+      font-size: 16px;
+      font-weight: var(--font-weight-light);
+      line-height: 24px;
+      color: var(--color-text);
+    }
+
+    .outcome-box {
+      background: var(--color-box-bg);
+      border: 1px solid var(--color-primary);
+      border-radius: 16px;
+      padding: 24px;
+      width: 680px;
+      max-width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .outcome-box__label {
+      font-size: 16px;
+      font-weight: var(--font-weight-bold);
+      line-height: 32px;
+      color: var(--color-primary);
+    }
+
+    .outcome-box__text {
+      font-size: 16px;
+      font-weight: var(--font-weight-light);
+      line-height: 24px;
+      color: #0D0D0D;
+    }
+
+    .full-bleed {
+      width: 100%;
+      max-width: var(--page-width);
+      height: 720px;
+      object-fit: cover;
+      display: block;
+    }
+
+    #case-study > .full-bleed {
+      margin-top: 60px;
+    }
+
+    .full-bleed--spaced {
+      margin-top: 60px;
+    }
+
+    .cs-section {
+      width: var(--content-width);
+      max-width: calc(100% - 48px);
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .full-bleed + .cs-section {
+      margin-top: 60px;
+    }
+
+    .cs-section__inner {
+      display: flex;
+      flex-direction: column;
+      gap: var(--gap-internal);
+    }
+
+    .cs-section__label {
+      font-size: 14px;
+      font-weight: var(--font-weight-bold);
+      line-height: 22px;
+      color: var(--color-primary);
+    }
+
+    .cs-section__heading {
+      font-size: 28px;
+      font-weight: var(--font-weight-regular);
+      line-height: 32px;
+      color: var(--color-text);
+    }
+
+    .cs-body {
+      font-size: 16px;
+      font-weight: var(--font-weight-light);
+      line-height: 24px;
+      color: var(--color-text);
+    }
+
+    .cs-body p,
+    .cs-body li {
+      font-size: 16px;
+      line-height: 24px;
+    }
+
+    .cs-body p + p {
+      margin-top: 16px;
+    }
+
+    .quote-block {
+      font-size: 24px;
+      font-weight: var(--font-weight-light);
+      font-style: italic;
+      line-height: 30px;
+      color: var(--color-primary);
+      text-align: center;
+    }
+
+    .cs-bold-statement {
+      font-size: 16px;
+      font-weight: var(--font-weight-light);
+      line-height: 24px;
+      color: #0D0D0D;
+    }
+
+    .cs-bold-statement strong {
+      font-weight: var(--font-weight-bold);
+    }
+
+    .cs-separator {
+      border: none;
+      border-top: 1px solid var(--color-separator);
+      width: 680px;
+      max-width: 100%;
+      margin: 60px auto;
+    }
+
+    .insight-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+    }
+
+    .insight-card {
+      background: var(--color-box-bg);
+      border: 1px solid var(--color-primary);
+      border-radius: 16px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .insight-card__title {
+      font-size: 16px;
+      font-weight: var(--font-weight-bold);
+      line-height: 24px;
+      color: var(--color-primary);
+    }
+
+    .insight-card__body {
+      font-size: 16px;
+      font-weight: var(--font-weight-light);
+      line-height: 24px;
+      color: #0D0D0D;
+    }
+
+    .persona-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    .persona-card {
+      background: var(--color-box-bg);
+      border: 1px solid var(--color-primary);
+      border-radius: 16px;
+      padding: 24px;
+      width: 680px;
+      max-width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .persona-card__name {
+      font-size: 16px;
+      font-weight: var(--font-weight-bold);
+      line-height: 24px;
+      color: var(--color-primary);
+    }
+
+    .persona-card__list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .persona-card__list li {
+      font-size: 16px;
+      font-weight: var(--font-weight-light);
+      line-height: 24px;
+      color: #0D0D0D;
+      padding-left: 16px;
+      position: relative;
+    }
+
+    .persona-card__list li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: #0D0D0D;
+    }
+
+    .feature-list {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .feature-item {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      column-gap: 32px;
+      row-gap: 8px;
+      padding: 32px 0;
+    }
+
+    .feature-item:first-child {
+      padding-top: 0;
+    }
+
+    .feature-item:last-child {
+      padding-bottom: 0;
+    }
+
+    .feature-item + .feature-item {
+      border-top: 1px solid var(--color-feature-divider);
+    }
+
+    .feature-item__number {
+      font-size: 14px;
+      font-weight: var(--font-weight-regular);
+      line-height: 24px;
+      color: var(--color-feature-number);
+      grid-row: 1;
+      grid-column: 1;
+    }
+
+    .feature-item__title {
+      font-size: 16px;
+      font-weight: var(--font-weight-bold);
+      line-height: 24px;
+      color: var(--color-primary);
+      grid-row: 1;
+      grid-column: 2;
+    }
+
+    .feature-item__desc {
+      font-size: 16px;
+      font-weight: var(--font-weight-light);
+      line-height: 24px;
+      color: #0D0D0D;
+      grid-row: 2;
+      grid-column: 2;
+    }
+
+    .game-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+    }
+
+    .game-card {
+      background: var(--color-box-bg);
+      border: 1px solid var(--color-primary);
+      border-radius: 16px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .game-card__title {
+      font-size: 16px;
+      font-weight: var(--font-weight-bold);
+      line-height: 24px;
+      color: var(--color-primary);
+    }
+
+    .game-card__body {
+      font-size: 16px;
+      font-weight: var(--font-weight-light);
+      line-height: 24px;
+      color: #0D0D0D;
+    }
+
+    .cs-caption {
+      width: var(--content-width);
+      max-width: calc(100% - 48px);
+      margin: 0 auto;
+      padding: 60px 0;
+      font-size: 14px;
+      font-weight: var(--font-weight-regular);
+      line-height: 22px;
+      color: #0D0D0D;
+      text-align: center;
+    }
+
+    .findings-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .findings-list li {
+      font-size: 16px;
+      font-weight: var(--font-weight-light);
+      line-height: 24px;
+      color: #0D0D0D;
+    }
+
+    .findings-list strong {
+      font-weight: var(--font-weight-bold);
+    }
+
+    .cs-section--last {
+      padding-bottom: 72px;
+    }
+
+    /* Footer */
+    .footer {
+      height: var(--footer-height);
+      background-color: var(--color-bg);
+      margin-top: auto;
+      width: 100%;
+    }
+
+    .footer__inner {
+      width: var(--content-width);
+      max-width: calc(100% - 48px);
+      height: 100%;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .footer__left {
+      display: flex;
+      align-items: center;
+      gap: var(--footer-link-gap);
+    }
+
+    .footer__back-to-top {
+      font-size: 14px;
+      font-weight: var(--font-weight-regular);
+      line-height: 17px;
+      color: var(--color-text);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .footer__back-to-top:hover {
+      color: var(--color-muted);
+    }
+
+    .footer__back-to-top:active {
+      color: var(--color-primary);
+    }
+
+    .footer__link {
+      font-size: 14px;
+      font-weight: var(--font-weight-regular);
+      line-height: 17px;
+      color: var(--color-text);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .footer__link:hover {
+      color: var(--color-muted);
+    }
+
+    .footer__link:active {
+      color: var(--color-primary);
+      text-decoration: underline;
+    }
+
+    .footer__copyright {
+      font-size: 12px;
+      font-weight: var(--font-weight-regular);
+      line-height: 20px;
+      color: var(--color-muted);
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      :root {
+        --nav-padding-outer: 48px;
+        --nav-padding-inner: 24px;
+      }
+
+      .content,
+      .cs-section,
+      .cs-caption {
+        width: calc(100% - 96px);
+        max-width: 680px;
+      }
+
+      .footer__inner {
+        width: calc(100% - 96px);
+        max-width: 680px;
+      }
+
+      .full-bleed {
+        width: 100vw;
+        max-width: none;
+        position: relative;
+        left: 50%;
+        transform: translateX(-50%);
+        height: 500px;
+        object-fit: cover;
+      }
+    }
+
+    @media (max-width: 768px) {
+      :root {
+        --nav-padding-outer: 24px;
+        --nav-padding-inner: 0px;
+        --gap-nav-links: 8px;
+        --gap-section: 40px;
+      }
+
+      .nav__logo {
+        font-size: 14px;
+      }
+
+      .nav__links {
+        gap: 8px;
+      }
+
+      .nav__links a {
+        font-size: 12px;
+      }
+
+      .content,
+      .cs-section,
+      .cs-caption {
+        width: calc(100% - 48px);
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .back-link {
+        align-self: flex-start;
+      }
+
+      .tags {
+        white-space: normal;
+      }
+
+      .cs-title {
+        font-size: 28px;
+        line-height: 36px;
+        width: 100%;
+        max-width: 100%;
+      }
+
+      .cs-intro,
+      .cs-body,
+      .cs-body p,
+      .cs-body li,
+      .feature-item__desc,
+      .persona-card__list li,
+      .solution-card__body,
+      .insight-card__body,
+      .game-card__body,
+      .outcome-box__text,
+      .outcome-box__list li {
+        font-size: 15px;
+        line-height: 24px;
+      }
+
+      .cs-intro {
+        width: 100%;
+        max-width: 100%;
+      }
+
+      .cs-meta {
+        gap: 24px;
+      }
+
+      .cs-meta__row {
+        flex-direction: column;
+        gap: 24px;
+      }
+
+      .cs-meta__item {
+        width: 100%;
+        max-width: 100%;
+      }
+
+      .cs-section__heading {
+        font-size: 22px;
+        line-height: 28px;
+      }
+
+      .outcome-box {
+        width: 100%;
+        max-width: 100%;
+        padding: 20px;
+      }
+
+      .full-bleed {
+        width: 100vw;
+        margin-left: calc(-50vw + 50%);
+        left: auto;
+        transform: none;
+        height: 300px;
+        object-fit: cover;
+      }
+
+      .insight-grid,
+      .solution-grid,
+      .game-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .persona-card {
+        width: 100%;
+        max-width: 100%;
+      }
+
+      .feature-list,
+      .problem-list {
+        width: 100%;
+      }
+
+      .cs-separator {
+        margin: 32px auto;
+      }
+
+      .full-bleed + .cs-section {
+        margin-top: 40px;
+      }
+
+      .footer__inner {
+        width: 100%;
+        padding: 0 24px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      :root {
+        --logo-letter-spacing: 0.1em;
+      }
+
+      .nav__logo {
+        font-size: 13px;
+      }
+
+      .nav__links a {
+        font-size: 11px;
+      }
+
+      .content,
+      .cs-section,
+      .cs-caption {
+        width: calc(100% - 32px);
+      }
+
+      .cs-title {
+        font-size: 24px;
+        line-height: 32px;
+      }
+
+      .cs-section__heading {
+        font-size: 20px;
+        line-height: 26px;
+      }
+
+      .full-bleed {
+        height: 240px;
+      }
+
+      .footer__inner {
+        width: calc(100% - 32px);
+      }
+    }
+  </style>
+</head>
+<body id="top">
+  <header class="nav">
+    <div class="nav__outer">
+      <div class="nav__inner">
+        <a href="../index.html" class="nav__logo">Jessica K</a>
+        <ul class="nav__links">
+          <li><a href="../index.html" class="nav__link--active">works</a></li>
+          <li><a href="../about.html">about</a></li>
+          <li><a href="https://www.linkedin.com/in/jessicakr/" target="_blank" rel="noopener noreferrer">linkedin</a></li>
+        </ul>
+      </div>
+    </div>
+  </header>
+
+  <div class="page" id="case-study">
+    <div class="content">
+      <a href="../index.html" class="back-link">&larr; home</a>
+      <div class="cs-hero">
+        <p class="tags">product design &bull; ui/ux design &bull; investment &bull; retail banking</p>
+        <h1 class="cs-title">Bunny Buddy</h1>
+        <p class="cs-intro">A gamified investment education companion for DBS Multiplier account holders. It's designed to close the gap between saving and investing.</p>
+
+        <div class="cs-meta">
+          <div class="cs-meta__row">
+            <div class="cs-meta__item">
+              <span class="cs-meta__label">Project of</span>
+              <span class="cs-meta__value">DBS Bank Singapore, Multiplier</span>
+            </div>
+            <div class="cs-meta__item">
+              <span class="cs-meta__label">My role</span>
+              <span class="cs-meta__value">UX Designer (sole designer)</span>
+            </div>
+          </div>
+          <div class="cs-meta__row">
+            <div class="cs-meta__item">
+              <span class="cs-meta__label">Platform</span>
+              <span class="cs-meta__value">Mobile interactive app prototype</span>
+            </div>
+            <div class="cs-meta__item">
+              <span class="cs-meta__label">Timeline</span>
+              <span class="cs-meta__value">December 2020 - May 2021</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="outcome-box">
+          <p class="outcome-box__label">🌟 Personal growth outcome</p>
+          <p class="outcome-box__text">&bull; My first End-to-end product design project from research and strategy, to high-fidelity prototype</p>
+        </div>
+      </div>
+    </div>
+
+    <img src="../assets/case-studies/bunny-buddy/bunny-buddy-hero.png" alt="Bunny Buddy mobile app mockups showing gamified investment education interface" class="full-bleed">
+
+    <section class="cs-section">
+      <div class="cs-section__inner">
+        <p class="cs-section__label">01 overview.</p>
+        <h2 class="cs-section__heading">Context</h2>
+        <div class="cs-body">
+          <p>Bunny Buddy was developed as part of the WOW Accelerator &times; Gamification Program by DBS Bank Singapore, in collaboration with the #SGUnitedTraineeship initiative. The project was owned by DBS Multiplier and built using the Octalysis gamification framework integrated with DBS's internal 4D design process.</p>
+          <p>The team was cross-functional. Consist of DBS employees from various departments; working together to design a mobile experience that would nudge Multiplier customers toward making their first investment.</p>
+        </div>
+      </div>
+      <hr class="cs-separator">
+    </section>
+
+    <section class="cs-section">
+      <div class="cs-section__inner">
+        <p class="cs-section__label">02 project goal.</p>
+        <h2 class="cs-section__heading">The problem</h2>
+        <p class="quote-block">&ldquo;How might we encourage Multiplier customers to move from passive saving toward active, confident investing, through education and sustained engagement?&rdquo;</p>
+        <p class="cs-bold-statement"><strong>Only 11%</strong> of DBS Multiplier account holders were actively investing with DBS and sustaining those investments beyond the bonus interest period. The goal was to raise that figure to <strong>20%</strong>.</p>
+      </div>
+      <hr class="cs-separator">
+    </section>
+
+    <section class="cs-section">
+      <div class="cs-section__inner">
+        <p class="cs-section__label">03 user research: qualitative research.</p>
+        <h2 class="cs-section__heading">Qualitative research insights</h2>
+        <div class="cs-body">
+          <p>We conducted interviews with 16 DBS Multiplier account holders, uncovering four consistent barriers to investing.</p>
+        </div>
+        <div class="insight-grid">
+          <div class="insight-card">
+            <p class="insight-card__title">💬 Personal growth outcome</p>
+            <p class="insight-card__body">Multiplier was seen as a savings product, not a gateway to financial planning or investing.</p>
+          </div>
+          <div class="insight-card">
+            <p class="insight-card__title">💬 Interest literacy</p>
+            <p class="insight-card__body">Many users didn't fully understand how Multiplier interest worked or how investments affected it.</p>
+          </div>
+          <div class="insight-card">
+            <p class="insight-card__title">💬 Knowledge gap</p>
+            <p class="insight-card__body">Account holders lacked investment knowledge and didn't know where to start, though they were open to learning.</p>
+          </div>
+          <div class="insight-card">
+            <p class="insight-card__title">💬 Risk perception</p>
+            <p class="insight-card__body">Investing was seen as requiring a large upfront sum and carrying significant risk — discouraging first steps.</p>
+          </div>
+        </div>
+      </div>
+      <hr class="cs-separator">
+    </section>
+
+    <section class="cs-section">
+      <div class="cs-section__inner">
+        <p class="cs-section__label">04 persona.</p>
+        <h2 class="cs-section__heading">Who we designed this for</h2>
+        <div class="cs-body">
+          <p>Research showed that the target user is a careful, busy professional who regularly saves money but has never invested before.</p>
+        </div>
+        <div class="persona-cards">
+          <div class="persona-card">
+            <p class="persona-card__name">Aloysius Tan, 36</p>
+            <ul class="persona-card__list">
+              <li>Married; prioritises family over personal finance habits</li>
+              <li>Cautious spender, saves consistently but avoids risk</li>
+              <li>No time for investment research; relies on defaults like CPF</li>
+              <li>Open to guidance, but needs a low-friction starting point</li>
+            </ul>
+          </div>
+          <div class="persona-card">
+            <p class="persona-card__name">Rachel Lim, 27</p>
+            <ul class="persona-card__list">
+              <li>Single; early career, just opened her first savings account</li>
+              <li>Interested in investing but overwhelmed by jargon</li>
+              <li>Learns best through short, bite-sized content</li>
+              <li>Motivated by progress tracking and visible milestones</li>
+            </ul>
+          </div>
+        </div>
+        <div class="cs-body">
+          <p>Both personas share the same underlying barrier: low investment confidence, but differ in life stage and motivation style.</p>
+        </div>
+      </div>
+      <hr class="cs-separator">
+    </section>
+
+    <section class="cs-section">
+      <div class="cs-section__inner">
+        <p class="cs-section__label">05 solution.</p>
+        <h2 class="cs-section__heading">Bunny Buddy, a gamified learning companion</h2>
+        <div class="cs-body">
+          <p>Rather than push product information, we designed a character-led experience that made financial education feel approachable and rewarding. A virtual bunny acts as a guide, delivering bite-sized investment content and celebrating user progress.</p>
+        </div>
+        <div class="feature-list">
+          <div class="feature-item">
+            <span class="feature-item__number">01</span>
+            <span class="feature-item__title">Bite sized information</span>
+            <p class="feature-item__desc">Investment education delivered in challenge-based modules. Short, informative and easy to digest in a few minutes.</p>
+          </div>
+          <div class="feature-item">
+            <span class="feature-item__number">02</span>
+            <span class="feature-item__title">Reward cycle</span>
+            <p class="feature-item__desc">A gamification loop that rewards progress: food items, accessories, coupon rewards, and lucky draw entries earned by completing challenges. These rewards can be used to feed the buddy (pet) or to accessorise the bunny buddy to be more personal.</p>
+          </div>
+          <div class="feature-item">
+            <span class="feature-item__number">03</span>
+            <span class="feature-item__title">Sense of achievement</span>
+            <p class="feature-item__desc">A happiness index and levelling system that makes learning progress visible, the bunny grows as users grow.</p>
+          </div>
+          <div class="feature-item">
+            <span class="feature-item__number">04</span>
+            <span class="feature-item__title">Reward system</span>
+            <p class="feature-item__desc">Achievement-linked accessories that signal mastery, e.g. completing Unit Trust challenges unlocks a 'Unit Trust Master' medal.</p>
+          </div>
+        </div>
+      </div>
+      <hr class="cs-separator">
+    </section>
+
+    <section class="cs-section">
+      <div class="cs-section__inner">
+        <p class="cs-section__label">06 game system.</p>
+        <h2 class="cs-section__heading">Game system that encourage user engagement</h2>
+        <div class="cs-body">
+          <p>The design used three key gamification elements to motivate users and encourage continued learning.</p>
+        </div>
+        <div class="game-grid">
+          <div class="game-card">
+            <p class="game-card__title">🏆 Achievement</p>
+            <p class="game-card__body">Users earn badges and unlock milestones as they complete learning topics.</p>
+          </div>
+          <div class="game-card">
+            <p class="game-card__title">🎲 Unpredictability</p>
+            <p class="game-card__body">Random food items and accessories keep the experience fresh and encourage repeat visits.</p>
+          </div>
+          <div class="game-card">
+            <p class="game-card__title">🎁 Rewards</p>
+            <p class="game-card__body">Users receive coupons and lucky draw entries for completing learning activities.</p>
+          </div>
+        </div>
+      </div>
+      <hr class="cs-separator">
+    </section>
+
+    <section class="cs-section">
+      <div class="cs-section__inner">
+        <p class="cs-section__label">07 interface design.</p>
+        <h2 class="cs-section__heading">Visual identity and interface design</h2>
+        <div class="cs-body">
+          <p>Bunny Buddy was designed to feel friendly and approachable while maintaining trust in a financial context. I contributed the initial logo concept and high-fidelity wireframes.</p>
+        </div>
+      </div>
+    </section>
+
+    <img src="../assets/case-studies/bunny-buddy/bunny-buddy-logo-design.png" alt="Initial character sketches and final Bunny Buddy logo designs" class="full-bleed full-bleed--spaced">
+
+    <p class="cs-caption">Initial character and game logo design</p>
+
+    <img src="../assets/case-studies/bunny-buddy/bunny-buddy-flow.png" alt="Bunny Buddy game flow diagram with screen thumbnails" class="full-bleed">
+
+    <p class="cs-caption">Game flow</p>
+
+    <img src="../assets/case-studies/bunny-buddy/bunny-buddy-ui.png" alt="Bunny Buddy high-fidelity mobile UI screens" class="full-bleed">
+
+    <section class="cs-section">
+      <div class="cs-section__inner">
+        <p class="cs-section__label">08 user testing results.</p>
+        <h2 class="cs-section__heading">Initial testing cycle 01 findings</h2>
+        <div class="cs-body">
+          <p>We conducted a first round of user testing with DBS Multiplier customers. The concept was well-received, with a few areas identified for iteration.</p>
+        </div>
+        <ul class="findings-list">
+          <li><strong>Positive reception:</strong> Most interviewees described the experience as fun, knowledgeable, and rewarding. The character led format effectively motivated continued engagement.</li>
+          <li><strong>Strong content interest:</strong> The majority felt well-prepared by the educational modules though some still needed additional encouragement to commit to a first investment.</li>
+          <li><strong>Creative adjustments needed:</strong> Testing revealed opportunities to improve character interactions, informing the focus of Cycle 02.</li>
+        </ul>
+      </div>
+    </section>
+
+    <img src="../assets/case-studies/bunny-buddy/bunny-buddy-result.png" alt="User testing results summary with feedback cards" class="full-bleed full-bleed--spaced">
+
+    <section class="cs-section cs-section--last">
+      <div class="cs-section__inner">
+        <p class="cs-section__label">09 reflection.</p>
+        <h2 class="cs-section__heading">Where all it started</h2>
+        <div class="cs-body">
+          <p>Bunny Buddy was the first project where I experienced the end-to-end design process. I conducted user interviews, translated research into a gamification strategy, designed the interface, tested with users, and iterated based on feedback.</p>
+          <p>Working in the financial domain added another layer of complexity. Because investment decisions directly affect users' financial confidence, every design choice needed careful consideration; from how information was presented to how rewards were introduced and how first-time investors were guided through the experience.</p>
+          <p>The project taught me how to balance user needs, business objectives, and product constraints simultaneously. A skill that continues to shape my approach to design today.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <footer class="footer">
+    <div class="footer__inner">
+      <div class="footer__left">
+        <a href="#" class="footer__back-to-top" aria-label="Back to top" onclick="window.scrollTo({ top: 0, behavior: 'smooth' }); return false;">&uarr;</a>
+        <a href="https://www.linkedin.com/in/jessicakr/" class="footer__link" target="_blank" rel="noopener noreferrer">linkedin</a>
+      </div>
+      <p class="footer__copyright">&copy; 2026 Jessica Kr</p>
+    </div>
+  </footer>
+</body>
+</html>

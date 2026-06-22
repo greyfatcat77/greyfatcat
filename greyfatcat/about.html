@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About — Jessica K</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      /* Colors */
+      --color-bg: #FFFFFF;
+      --color-primary: #1D56CF;
+      --color-text: #0D0D0D;
+      --color-muted: #AEABA5;
+      --color-black: #000000;
+      --color-separator: #C2C2C2;
+
+      /* Typography */
+      --font-family: 'Inter', sans-serif;
+
+      /* Font sizes */
+      --font-size-hero: 40px;
+      --font-size-body: 20px;
+      --font-size-works-heading: 40px;
+      --font-size-card-title: 24px;
+      --font-size-card-meta: 12px;
+      --font-size-nav: 14px;
+      --font-size-logo: 18px;
+      --font-size-footer: 12px;
+
+      /* Line heights */
+      --line-height-hero: 48px;
+      --line-height-body: 32px;
+      --line-height-card-title: 32px;
+      --line-height-meta: 20px;
+      --line-height-nav: 17px;
+
+      /* Font weights */
+      --font-weight-regular: 300;
+      --font-weight-medium: 400;
+      --font-weight-semibold: 500;
+
+      /* Layout */
+      --content-width: 680px;
+      --page-width: 1440px;
+      --nav-height: 60px;
+      --footer-height: 72px;
+      --nav-padding-outer: 120px;
+      --nav-padding-inner: 60px;
+      --content-padding: 72px 0px 120px;
+      --content-top: 0px;
+
+      /* Spacing */
+      --gap-section: 60px;
+      --gap-about: 32px;
+      --gap-card-internal: 32px;
+      --gap-tag: 8px;
+      --gap-icon-set: 24px;
+      --gap-nav-links: 32px;
+
+      /* Card */
+      --card-image-width: 434px;
+      --card-image-height: 272px;
+      --card-total-width: 900px;
+
+      /* Separator */
+      --separator: 1px solid #C2C2C2;
+
+      /* Logo */
+      --logo-letter-spacing: 0.2em;
+      --logo-text-transform: uppercase;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-family);
+      background-color: var(--color-bg);
+      color: var(--color-text);
+      min-height: 100vh;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page {
+      max-width: var(--page-width);
+      margin: 0 auto;
+      position: relative;
+      min-height: 100vh;
+    }
+
+    /* Navigation */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      width: 100%;
+      height: var(--nav-height);
+      background-color: var(--color-bg);
+      border-bottom: var(--separator);
+    }
+
+    .nav__outer {
+      max-width: var(--page-width);
+      margin: 0 auto;
+      height: 100%;
+      padding: 0 var(--nav-padding-outer);
+    }
+
+    .nav__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 100%;
+      padding: 0 var(--nav-padding-inner);
+    }
+
+    .nav__logo {
+      font-size: var(--font-size-logo);
+      font-weight: var(--font-weight-semibold);
+      letter-spacing: var(--logo-letter-spacing);
+      text-transform: var(--logo-text-transform);
+      color: var(--color-primary);
+      line-height: 1;
+    }
+
+    .nav__links {
+      display: flex;
+      align-items: center;
+      gap: var(--gap-nav-links);
+      list-style: none;
+    }
+
+    .nav__links a {
+      font-size: var(--font-size-nav);
+      font-weight: var(--font-weight-medium);
+      line-height: var(--line-height-nav);
+      color: var(--color-text);
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .nav__links a:hover {
+      color: var(--color-muted);
+      text-decoration: none;
+    }
+
+    .nav__links a:active {
+      color: var(--color-primary);
+      text-decoration: underline;
+    }
+
+    .nav__links a.nav__link--active {
+      color: var(--color-primary);
+      text-decoration: underline;
+    }
+
+    /* Main content */
+    .content {
+      width: var(--content-width);
+      max-width: calc(100% - 48px);
+      margin: 0 auto;
+      padding: var(--content-padding);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .back-link {
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 17px;
+      color: var(--color-primary);
+      align-self: flex-start;
+      cursor: pointer;
+      text-decoration: none;
+      margin-bottom: 60px;
+      transition: color 0.2s ease;
+    }
+
+    .back-link:hover {
+      color: var(--color-muted);
+    }
+
+    .back-link:active {
+      color: var(--color-primary);
+      text-decoration: underline;
+    }
+
+    .about-hero {
+      display: flex;
+      flex-direction: column;
+      gap: var(--gap-about);
+      margin-bottom: var(--gap-section);
+    }
+
+    .hero__icon {
+      display: block;
+      width: 88px;
+      height: 16px;
+    }
+
+    .about-hero__heading {
+      font-size: 40px;
+      font-weight: var(--font-weight-regular);
+      line-height: 48px;
+      color: var(--color-text);
+      width: 680px;
+      max-width: 100%;
+    }
+
+    .about-hero__subheading {
+      font-size: 20px;
+      font-weight: var(--font-weight-regular);
+      line-height: 32px;
+      color: var(--color-text);
+      width: 680px;
+      max-width: 100%;
+    }
+
+    /* About sections */
+    .about-section {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-bottom: var(--gap-section);
+    }
+
+    .about-section__label {
+      font-size: 14px;
+      font-weight: var(--font-weight-regular);
+      line-height: 20px;
+      text-transform: uppercase;
+      color: var(--color-primary);
+    }
+
+    .about-section__body {
+      font-size: 16px;
+      font-weight: var(--font-weight-regular);
+      line-height: 24px;
+      color: var(--color-text);
+    }
+
+    .about-section__body + .about-section__body {
+      margin-top: 0;
+    }
+
+    .about-built-with {
+      font-size: 12px;
+      font-weight: 300;
+      line-height: 20px;
+      color: #1D56CF;
+      width: 680px;
+      max-width: 100%;
+      margin: 0;
+      text-align: center;
+    }
+
+    .skills-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .skills-tag {
+      border: 1px solid var(--color-primary);
+      border-radius: 100px;
+      padding: 6px 12px;
+      font-size: 12px;
+      font-weight: var(--font-weight-regular);
+      line-height: 20px;
+      color: var(--color-primary);
+    }
+
+    .about-section--skills {
+      margin-bottom: 0;
+    }
+
+    /* Contact */
+    .about-contact {
+      margin-top: 120px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 32px;
+    }
+
+    .about-contact__heading {
+      font-size: 40px;
+      font-weight: var(--font-weight-regular);
+      line-height: 48px;
+      text-align: center;
+      color: var(--color-black);
+    }
+
+    .about-contact__link {
+      color: var(--color-primary);
+      text-decoration: underline;
+    }
+
+    .about-contact__link:hover {
+      color: var(--color-muted);
+    }
+
+    /* Footer */
+    .footer {
+      height: var(--footer-height);
+      background-color: var(--color-bg);
+    }
+
+    .footer__inner {
+      width: var(--content-width);
+      max-width: 100%;
+      height: 100%;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .footer__left {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+
+    .footer__back-to-top {
+      font-size: var(--font-size-nav);
+      font-weight: var(--font-weight-medium);
+      line-height: var(--line-height-nav);
+      color: var(--color-text);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .footer__back-to-top:hover {
+      color: var(--color-muted);
+    }
+
+    .footer__back-to-top:active {
+      color: var(--color-primary);
+    }
+
+    .footer__link {
+      font-size: var(--font-size-nav);
+      font-weight: var(--font-weight-medium);
+      line-height: var(--line-height-nav);
+      color: var(--color-text);
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .footer__link:hover {
+      color: var(--color-muted);
+      text-decoration: none;
+    }
+
+    .footer__link:active {
+      color: var(--color-primary);
+      text-decoration: underline;
+    }
+
+    .footer__copyright {
+      font-size: var(--font-size-footer);
+      font-weight: var(--font-weight-medium);
+      line-height: var(--line-height-meta);
+      color: var(--color-muted);
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      :root {
+        --nav-padding-outer: 48px;
+        --nav-padding-inner: 24px;
+      }
+
+      .content {
+        width: calc(100% - 96px);
+        max-width: 680px;
+        margin: 0 auto;
+      }
+
+      .about-hero__heading {
+        font-size: 32px;
+        line-height: 40px;
+      }
+
+      .footer__inner {
+        width: calc(100% - 96px);
+        max-width: 680px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      :root {
+        --nav-padding-outer: 24px;
+        --nav-padding-inner: 0px;
+        --gap-nav-links: 8px;
+        --font-size-nav: 12px;
+        --font-size-logo: 14px;
+        --gap-section: 40px;
+      }
+
+      .nav__logo {
+        font-size: 14px;
+      }
+
+      .nav__links {
+        gap: 8px;
+      }
+
+      .nav__links a {
+        font-size: 12px;
+      }
+
+      .content {
+        width: calc(100% - 48px);
+        margin: 0 auto;
+      }
+
+      .about-hero__heading {
+        font-size: 28px;
+        line-height: 36px;
+      }
+
+      .about-hero__subheading {
+        font-size: 16px;
+        line-height: 24px;
+      }
+
+      .about-contact__heading {
+        font-size: 28px;
+        line-height: 36px;
+      }
+
+      .footer__inner {
+        width: 100%;
+        padding: 0 24px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      :root {
+        --font-size-logo: 13px;
+        --logo-letter-spacing: 0.1em;
+        --font-size-nav: 11px;
+      }
+
+      .content {
+        width: calc(100% - 32px);
+      }
+
+      .about-hero__heading,
+      .about-contact__heading {
+        font-size: 24px;
+        line-height: 32px;
+      }
+
+      .footer__inner {
+        width: calc(100% - 32px);
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="nav">
+    <div class="nav__outer">
+      <div class="nav__inner">
+        <a href="index.html#top" class="nav__logo">Jessica K</a>
+        <ul class="nav__links">
+          <li><a href="index.html#works">works</a></li>
+          <li><a href="about.html" class="nav__link--active">about</a></li>
+          <li><a href="https://www.linkedin.com/in/jessicakr/" target="_blank" rel="noopener noreferrer">linkedin</a></li>
+        </ul>
+      </div>
+    </div>
+  </header>
+
+  <div class="page" id="top">
+    <main class="content">
+      <a href="index.html" class="back-link">&larr; home</a>
+      <section class="about-hero">
+        <img src="assets/thumbnails/top-icon.svg" alt="" class="hero__icon" aria-hidden="true">
+        <h1 class="about-hero__heading">Hi, I'm Jessica. I'm a UX designer who enjoys turning complex systems into simple, useful experiences.</h1>
+        <p class="about-hero__subheading">Based in Singapore, I've spent the last few years designing digital products for banks and fintech companies across Asia.</p>
+      </section>
+
+      <section class="about-section">
+        <p class="about-section__label">Background</p>
+        <p class="about-section__body">Over the past 6 years, I've worked across banking and fintech, from DBS Singapore to digital banking platforms used by banks across Asia. I enjoy working where business goals, technology, and human needs intersect; simplifying complex problems and creating experiences that feel intuitive and useful.</p>
+        <p class="about-section__body">Outside of project work, I'm exploring how AI can support everyday workflows and improve how teams work.</p>
+      </section>
+
+      <section class="about-section about-section--skills">
+        <p class="about-section__label">Skills</p>
+        <div class="skills-tags">
+          <span class="skills-tag">Product Strategy</span>
+          <span class="skills-tag">User Research</span>
+          <span class="skills-tag">Interaction Design</span>
+          <span class="skills-tag">Design Systems</span>
+          <span class="skills-tag">AI Workflows</span>
+          <span class="skills-tag">Stakeholder Management</span>
+          <span class="skills-tag">Cross-functional Collaboration</span>
+          <span class="skills-tag">Fintech Products</span>
+        </div>
+      </section>
+
+      <section class="about-contact">
+        <p class="about-contact__heading">Let's <a href="https://www.linkedin.com/in/jessicakr/" class="about-contact__link" target="_blank" rel="noopener noreferrer">work together</a>.</p>
+        <p class="about-built-with">This portfolio website is built with Figma, Claude &amp; Cursor</p>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="footer__inner">
+        <div class="footer__left">
+          <a href="#" class="footer__back-to-top" aria-label="Back to top" onclick="window.scrollTo({ top: 0, behavior: 'smooth' }); return false;">&uarr;</a>
+          <a href="https://www.linkedin.com/in/jessicakr/" class="footer__link" target="_blank" rel="noopener noreferrer">linkedin</a>
+        </div>
+        <p class="footer__copyright">&copy; 2026 Jessica Kr</p>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>

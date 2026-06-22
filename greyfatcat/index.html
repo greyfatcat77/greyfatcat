@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Greyfatcat — Jessica K</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      /* Colors */
+      --color-bg: #FFFFFF;
+      --color-primary: #1D56CF;
+      --color-text: #0D0D0D;
+      --color-muted: #AEABA5;
+      --color-black: #000000;
+      --color-separator: #C2C2C2;
+
+      /* Typography */
+      --font-family: 'Inter', sans-serif;
+
+      /* Font sizes */
+      --font-size-hero: 40px;
+      --font-size-body: 20px;
+      --font-size-works-heading: 40px;
+      --font-size-card-title: 24px;
+      --font-size-card-meta: 12px;
+      --font-size-nav: 14px;
+      --font-size-logo: 18px;
+      --font-size-footer: 12px;
+
+      /* Line heights */
+      --line-height-hero: 48px;
+      --line-height-body: 32px;
+      --line-height-card-title: 32px;
+      --line-height-meta: 20px;
+      --line-height-nav: 17px;
+
+      /* Font weights */
+      --font-weight-regular: 300;
+      --font-weight-medium: 400;
+      --font-weight-semibold: 500;
+
+      /* Layout */
+      --content-width: 900px;
+      --page-width: 1440px;
+      --nav-height: 60px;
+      --footer-height: 72px;
+      --nav-padding-outer: 120px;
+      --nav-padding-inner: 60px;
+      --content-padding: 72px 0px;
+      --content-top: 60px;
+
+      /* Spacing */
+      --gap-section: 60px;
+      --gap-about: 32px;
+      --gap-card-internal: 32px;
+      --gap-tag: 8px;
+      --gap-icon-set: 24px;
+      --gap-nav-links: 32px;
+
+      /* Card */
+      --card-image-width: 434px;
+      --card-image-height: 272px;
+      --card-total-width: 900px;
+
+      /* Separator */
+      --separator: 1px solid #C2C2C2;
+
+      /* Logo */
+      --logo-letter-spacing: 0.2em;
+      --logo-text-transform: uppercase;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 60px;
+    }
+
+    body {
+      font-family: var(--font-family);
+      background-color: var(--color-bg);
+      color: var(--color-text);
+      min-height: 100vh;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page {
+      max-width: var(--page-width);
+      margin: 0 auto;
+      position: relative;
+      min-height: 100vh;
+    }
+
+    /* Navigation */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      width: 100%;
+      height: var(--nav-height);
+      background-color: var(--color-bg);
+      border-bottom: var(--separator);
+    }
+
+    .nav__outer {
+      max-width: var(--page-width);
+      margin: 0 auto;
+      height: 100%;
+      padding: 0 var(--nav-padding-outer);
+    }
+
+    .nav__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 100%;
+      padding: 0 var(--nav-padding-inner);
+    }
+
+    .nav__logo {
+      font-size: var(--font-size-logo);
+      font-weight: var(--font-weight-semibold);
+      letter-spacing: var(--logo-letter-spacing);
+      text-transform: var(--logo-text-transform);
+      color: var(--color-primary);
+      line-height: 1;
+    }
+
+    .nav__links {
+      display: flex;
+      align-items: center;
+      gap: var(--gap-nav-links);
+      list-style: none;
+    }
+
+    .nav__links a {
+      font-size: var(--font-size-nav);
+      font-weight: var(--font-weight-medium);
+      line-height: var(--line-height-nav);
+      color: var(--color-text);
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .nav__links a:hover {
+      color: var(--color-muted);
+      text-decoration: none;
+    }
+
+    .nav__links a:active {
+      color: var(--color-primary);
+      text-decoration: underline;
+    }
+
+    /* Main content */
+    .content {
+      width: var(--content-width);
+      max-width: 100%;
+      margin: 0 auto;
+      padding: var(--content-padding);
+      padding-top: var(--content-top);
+    }
+
+    /* Hero */
+    .hero {
+      max-width: 668px;
+      margin-bottom: var(--gap-section);
+    }
+
+    .hero__icon {
+      display: block;
+      margin-bottom: var(--gap-about);
+    }
+
+    .hero__heading {
+      font-size: var(--font-size-hero);
+      font-weight: var(--font-weight-regular);
+      line-height: var(--line-height-hero);
+      color: var(--color-text);
+      margin-bottom: var(--gap-about);
+    }
+
+    .hero__heading .highlight {
+      color: var(--color-primary);
+      font-weight: var(--font-weight-medium);
+    }
+
+    .hero__body {
+      font-size: var(--font-size-body);
+      font-weight: var(--font-weight-regular);
+      line-height: var(--line-height-body);
+      color: var(--color-text);
+    }
+
+    /* Works section */
+    .works {
+      display: flex;
+      flex-direction: column;
+      gap: var(--gap-section);
+    }
+
+    .works__heading {
+      font-size: var(--font-size-works-heading);
+      font-weight: var(--font-weight-medium);
+      color: var(--color-primary);
+      line-height: var(--line-height-hero);
+    }
+
+    .works__list {
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Project cards */
+    .card {
+      display: flex;
+      gap: var(--gap-card-internal);
+      padding: var(--gap-section) 0;
+      border-top: var(--separator);
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+      transition: all 0.2s ease;
+    }
+
+    .card:hover .card__title {
+      text-decoration: underline;
+      color: var(--color-text);
+    }
+
+    .card:hover .card__image {
+      opacity: 0.75;
+    }
+
+    .card:active .card__title {
+      color: var(--color-primary);
+      text-decoration: underline;
+    }
+
+    .card__image {
+      flex: 0 0 var(--card-image-width);
+      width: 100%;
+      height: 272px;
+      object-fit: cover;
+      display: block;
+      transition: all 0.2s ease;
+    }
+
+    .card__details {
+      flex: 1;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card__year {
+      font-size: var(--font-size-card-meta);
+      font-weight: var(--font-weight-medium);
+      line-height: var(--line-height-meta);
+      color: var(--color-black);
+    }
+
+    .card__title {
+      font-size: var(--font-size-card-title);
+      font-weight: var(--font-weight-medium);
+      line-height: var(--line-height-card-title);
+      color: var(--color-text);
+      margin-top: var(--gap-tag);
+      margin-bottom: var(--gap-tag);
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .card__client {
+      font-size: var(--font-size-card-meta);
+      font-weight: var(--font-weight-medium);
+      line-height: var(--line-height-meta);
+      color: var(--color-black);
+    }
+
+    .card__tags {
+      font-size: var(--font-size-card-meta);
+      font-weight: var(--font-weight-medium);
+      line-height: var(--line-height-meta);
+      color: var(--color-primary);
+      margin-top: auto;
+    }
+
+    /* Footer */
+    .footer {
+      height: var(--footer-height);
+      background-color: var(--color-bg);
+    }
+
+    .footer__inner {
+      width: var(--content-width);
+      max-width: 100%;
+      height: 100%;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .footer__left {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+
+    .footer__back-to-top {
+      font-size: var(--font-size-nav);
+      font-weight: var(--font-weight-medium);
+      line-height: var(--line-height-nav);
+      color: var(--color-text);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .footer__back-to-top:hover {
+      color: var(--color-muted);
+    }
+
+    .footer__back-to-top:active {
+      color: var(--color-primary);
+    }
+
+    .footer__link {
+      font-size: var(--font-size-nav);
+      font-weight: var(--font-weight-medium);
+      line-height: var(--line-height-nav);
+      color: var(--color-text);
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .footer__link:hover {
+      color: var(--color-muted);
+      text-decoration: none;
+    }
+
+    .footer__link:active {
+      color: var(--color-primary);
+      text-decoration: underline;
+    }
+
+    .footer__copyright {
+      font-size: var(--font-size-footer);
+      font-weight: var(--font-weight-medium);
+      line-height: var(--line-height-meta);
+      color: var(--color-muted);
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      :root {
+        --nav-padding-outer: 48px;
+        --nav-padding-inner: 24px;
+      }
+
+      .content {
+        width: calc(100% - 96px);
+        max-width: 680px;
+        margin: 0 auto;
+      }
+
+      .hero__heading {
+        font-size: 32px;
+        line-height: 40px;
+      }
+
+      .card {
+        gap: 24px;
+      }
+
+      .footer__inner {
+        width: calc(100% - 96px);
+        max-width: 900px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      :root {
+        --nav-padding-outer: 24px;
+        --nav-padding-inner: 0px;
+        --gap-nav-links: 8px;
+        --font-size-nav: 12px;
+        --font-size-logo: 14px;
+        --gap-section: 40px;
+      }
+
+      .nav__logo {
+        font-size: 14px;
+      }
+
+      .nav__links {
+        gap: 8px;
+      }
+
+      .nav__links a {
+        font-size: 12px;
+      }
+
+      .content {
+        width: calc(100% - 48px);
+        margin: 0 auto;
+      }
+
+      .hero__heading {
+        font-size: 28px;
+        line-height: 36px;
+      }
+
+      .hero__body {
+        font-size: 16px;
+        line-height: 24px;
+      }
+
+      .works__heading {
+        font-size: 28px;
+      }
+
+      .card {
+        flex-direction: column;
+      }
+
+      .card__image {
+        flex: none;
+        width: 100%;
+        height: 200px;
+      }
+
+      .card__details {
+        width: 100%;
+        padding-top: 16px;
+      }
+
+      .card__year,
+      .card__title,
+      .card__client,
+      .card__tags {
+        width: 100%;
+      }
+
+      .footer__inner {
+        width: 100%;
+        padding: 0 24px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      :root {
+        --font-size-logo: 13px;
+        --logo-letter-spacing: 0.1em;
+        --font-size-nav: 11px;
+      }
+
+      .content {
+        width: calc(100% - 32px);
+      }
+
+      .hero__heading {
+        font-size: 24px;
+        line-height: 32px;
+      }
+
+      .card__image {
+        height: 180px;
+      }
+
+      .footer__inner {
+        width: calc(100% - 32px);
+      }
+    }
+  </style>
+</head>
+<body id="top">
+  <header class="nav">
+    <div class="nav__outer">
+      <div class="nav__inner">
+        <a href="index.html" class="nav__logo">Jessica K</a>
+        <ul class="nav__links">
+          <li><a href="#works">works</a></li>
+          <li><a href="about.html">about</a></li>
+          <li><a href="https://www.linkedin.com/in/jessicakr/" target="_blank" rel="noopener noreferrer">linkedin</a></li>
+        </ul>
+      </div>
+    </div>
+  </header>
+
+  <div class="page">
+    <main class="content">
+      <section class="hero" id="about">
+        <img src="assets/thumbnails/top-icon.svg" alt="" class="hero__icon" aria-hidden="true">
+        <h1 class="hero__heading">
+          Crafting <span class="highlight">thoughtful products</span> and <span class="highlight">solutions</span> that solve real user problems
+        </h1>
+        <p class="hero__body">
+          UX designer / product designer specialising in fintech and digital banking. I design user-centered experiences that balance business goals, technical constraints, and customer needs; while exploring how AI can accelerate design and innovation.
+        </p>
+      </section>
+
+      <section class="works" id="works">
+        <h2 class="works__heading">works.</h2>
+
+        <div class="works__list">
+          <a href="case-studies/kill-switch.html" class="card">
+            <img src="assets/thumbnails/kill-switch.png" alt="Kill Switch &amp; the Improvement of Login Experience" class="card__image">
+            <div class="card__details">
+              <p class="card__year">2026</p>
+              <h3 class="card__title">Kill Switch &amp; the Improvement of Login Experience</h3>
+              <p class="card__client">EastWest Bank Business Banking | EasyBiz</p>
+              <p class="card__tags">ui/ux design &bull; security &bull; business banking</p>
+            </div>
+          </a>
+
+          <a href="case-studies/swift.html" class="card">
+            <img src="assets/thumbnails/swift.png" alt="Redesigning Bank Search on SWIFT Transfer Journey" class="card__image">
+            <div class="card__details">
+              <p class="card__year">2026</p>
+              <h3 class="card__title">Redesigning Bank Search on SWIFT Transfer Journey</h3>
+              <p class="card__client">EastWest Bank Business Banking | EasyBiz</p>
+              <p class="card__tags">ui/ux design &bull; international transfer &bull; business banking</p>
+            </div>
+          </a>
+
+          <a href="case-studies/eastwest-platform.html" class="card">
+            <img src="assets/thumbnails/eastwest-platform.png" alt="Redesigning EastWest Bank's Business Banking Platform" class="card__image">
+            <div class="card__details">
+              <p class="card__year">2024</p>
+              <h3 class="card__title">Redesigning EastWest Bank's Business Banking Platform</h3>
+              <p class="card__client">EastWest Bank Business Banking | EasyBiz</p>
+              <p class="card__tags">ui/ux design &bull; fintech &bull; business banking</p>
+            </div>
+          </a>
+
+          <a href="case-studies/bunny-buddy.html" class="card">
+            <img src="assets/thumbnails/bunny-buddy.png" alt="Bunny Buddy a Gamified Investment Education Journey" class="card__image">
+            <div class="card__details">
+              <p class="card__year">2021</p>
+              <h3 class="card__title">Bunny Buddy a Gamified Investment Education Journey</h3>
+              <p class="card__client">DBS Bank | DBS Multiplier | DBS Transformation Group</p>
+              <p class="card__tags">product design &bull; ui/ux design &bull; investment &bull; retail banking</p>
+            </div>
+          </a>
+
+          <a href="case-studies/gpq.html" class="card">
+            <img src="assets/thumbnails/gpq.png" alt="Gpq: Simplifying the process of finding and seeing a doctor" class="card__image">
+            <div class="card__details">
+              <p class="card__year">2020</p>
+              <h3 class="card__title">Gpq: Simplifying the process of finding and seeing a doctor</h3>
+              <p class="card__client">Personal Project</p>
+              <p class="card__tags">product design &bull; ui/ux design &bull; healthcare</p>
+            </div>
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="footer__inner">
+        <div class="footer__left">
+          <a href="#" class="footer__back-to-top" aria-label="Back to top" onclick="window.scrollTo({ top: 0, behavior: 'smooth' }); return false;">&uarr;</a>
+          <a href="https://www.linkedin.com/in/jessicakr/" class="footer__link" target="_blank" rel="noopener noreferrer">linkedin</a>
+        </div>
+        <p class="footer__copyright">&copy; 2026 Jessica Kr</p>
+      </div>
+    </footer>
+  </div>
+  <script>
+    if (window.location.hash) {
+      window.scrollTo(0, 0);
+    }
+  </script>
+</body>
+</html>

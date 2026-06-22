@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GPq — Jessica K</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --color-bg: #FFFFFF;
+      --color-primary: #1D56CF;
+      --color-text: #0D0D0D;
+      --color-muted: #AEABA5;
+      --color-separator: #C2C2C2;
+      --color-box-bg: #F5F5F5;
+      --color-feature-number: #6E7A8E;
+      --color-feature-divider: #C2C2C2;
+
+      --font-family: 'Inter', sans-serif;
+
+      --font-weight-light: 300;
+      --font-weight-regular: 400;
+      --font-weight-medium: 500;
+      --font-weight-bold: 600;
+
+      --page-width: 1440px;
+      --content-width: 680px;
+      --nav-height: 60px;
+      --footer-height: 72px;
+      --nav-padding-outer: 120px;
+      --nav-padding-inner: 60px;
+      --content-padding: 72px 0px;
+      --gap-section: 60px;
+      --gap-internal: 32px;
+      --gap-meta: 32px;
+      --gap-nav-links: 32px;
+      --footer-link-gap: 16px;
+
+      --separator: 1px solid #C2C2C2;
+      --logo-letter-spacing: 0.2em;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-family);
+      background-color: var(--color-bg);
+      color: var(--color-text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page {
+      max-width: var(--page-width);
+      margin: 0 auto;
+      background-color: var(--color-bg);
+      width: 100%;
+    }
+
+    /* Navigation */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      width: 100%;
+      height: var(--nav-height);
+      background-color: var(--color-bg);
+      border-bottom: var(--separator);
+    }
+
+    .nav__outer {
+      max-width: var(--page-width);
+      margin: 0 auto;
+      height: 100%;
+      padding: 0 var(--nav-padding-outer);
+    }
+
+    .nav__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 100%;
+      padding: 0 var(--nav-padding-inner);
+    }
+
+    .nav__logo {
+      font-size: 18px;
+      font-weight: var(--font-weight-medium);
+      letter-spacing: var(--logo-letter-spacing);
+      text-transform: uppercase;
+      color: var(--color-primary);
+      line-height: 1;
+    }
+
+    .nav__links {
+      display: flex;
+      align-items: center;
+      gap: var(--gap-nav-links);
+      list-style: none;
+    }
+
+    .nav__links a {
+      font-size: 14px;
+      font-weight: var(--font-weight-regular);
+      line-height: 17px;
+      color: var(--color-text);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .nav__links a:hover {
+      color: var(--color-muted);
+    }
+
+    .nav__links a.nav__link--active {
+      color: var(--color-primary);
+      text-decoration: underline;
+    }
+
+    /* Case study layout */
+    .content {
+      width: var(--content-width);
+      max-width: calc(100% - 48px);
+      margin: 0 auto;
+      padding: 72px 0 0;
+      display: flex;
+      flex-direction: column;
+      gap: var(--gap-section);
+    }
+
+    .cs-hero {
+      display: flex;
+      flex-direction: column;
+      gap: var(--gap-internal);
+    }
+
+    .back-link {
+      font-size: 14px;
+      font-weight: var(--font-weight-regular);
+      color: var(--color-primary);
+      align-self: flex-start;
+      transition: color 0.2s ease;
+    }
+
+    .back-link:hover {
+      color: var(--color-muted);
+    }
+
+    .tags {
+      font-size: 12px;
+      font-weight: var(--font-weight-regular);
+      line-height: 20px;
+      color: var(--color-primary);
+    }
+
+    .cs-title {
+      font-size: 40px;
+      font-weight: var(--font-weight-regular);
+      line-height: 48px;
+      color: var(--color-text);
+      width: 680px;
+      max-width: 100%;
+    }
+
+    .cs-intro {
+      display: block;
+      width: 680px;
+      max-width: 100%;
+      font-size: 16px;
+      font-weight: var(--font-weight-light);
+      line-height: 24px;
+      color: #0D0D0D;
+      margin: 0;
+    }
+
+    .cs-meta {
+      display: flex;
+      flex-direction: column;
+      gap: var(--gap-meta);
+    }
+
+    .cs-meta__row {
+      display: flex;
+      gap: var(--gap-meta);
+    }
+
+    .cs-meta__item {
+      width: 324px;
+      max-width: calc(50% - 16px);
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .cs-meta__label {
+      font-size: 16px;
+      font-weight: var(--font-weight-regular);
+      line-height: 24px;
+      color: var(--color-primary);
+    }
+
+    .cs-meta__value {
+      font-size: 16px;
+      font-weight: var(--font-weight-light);
+      line-height: 24px;
+      color: var(--color-text);
+    }
+
+    .full-bleed {
+      width: 1440px;
+      max-width: var(--page-width);
+      height: 720px;
+      object-fit: cover;
+      position: relative;
+      left: 50%;
+      transform: translateX(-50%);
+      display: block;
+    }
+
+    #case-study > .full-bleed {
+      margin-top: 60px;
+    }
+
+    .full-bleed--spaced {
+      margin-top: 60px;
+    }
+
+    .full-bleed--section {
+      margin-top: 32px;
+    }
+
+    .cs-section {
+      width: var(--content-width);
+      max-width: calc(100% - 48px);
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .full-bleed + .cs-section {
+      margin-top: 60px;
+    }
+
+    .cs-section__inner {
+      display: flex;
+      flex-direction: column;
+      gap: var(--gap-internal);
+    }
+
+    .cs-section__label {
+      font-size: 14px;
+      font-weight: var(--font-weight-bold);
+      line-height: 22px;
+      color: var(--color-primary);
+    }
+
+    .cs-section__heading {
+      font-size: 28px;
+      font-weight: var(--font-weight-regular);
+      line-height: 32px;
+      color: var(--color-text);
+    }
+
+    .cs-body {
+      font-size: 16px;
+      font-weight: var(--font-weight-light);
+      line-height: 24px;
+      color: var(--color-text);
+    }
+
+    .cs-body p,
+    .cs-body li {
+      font-size: 16px;
+      line-height: 24px;
+    }
+
+    .cs-body p + p {
+      margin-top: 16px;
+    }
+
+    .quote-block {
+      font-size: 24px;
+      font-weight: var(--font-weight-light);
+      font-style: italic;
+      line-height: 30px;
+      color: var(--color-primary);
+      text-align: center;
+    }
+
+    .cs-separator {
+      border: none;
+      border-top: 1px solid var(--color-separator);
+      width: 680px;
+      max-width: 100%;
+      margin: 60px auto;
+    }
+
+    .persona-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    .persona-card {
+      background: var(--color-box-bg);
+      border: 1px solid var(--color-primary);
+      border-radius: 16px;
+      padding: 24px;
+      width: 680px;
+      max-width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .persona-card__name {
+      font-size: 16px;
+      font-weight: var(--font-weight-bold);
+      line-height: 24px;
+      color: var(--color-primary);
+    }
+
+    .persona-card__list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .persona-card__list li {
+      font-size: 16px;
+      font-weight: var(--font-weight-light);
+      line-height: 24px;
+      color: #0D0D0D;
+      padding-left: 16px;
+      position: relative;
+    }
+
+    .persona-card__list li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: #0D0D0D;
+    }
+
+    .feature-list {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .feature-item {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      column-gap: 32px;
+      row-gap: 8px;
+      padding: 32px 0;
+    }
+
+    .feature-item:first-child {
+      padding-top: 0;
+    }
+
+    .feature-item:last-child {
+      padding-bottom: 0;
+    }
+
+    .feature-item + .feature-item {
+      border-top: 1px solid var(--color-feature-divider);
+    }
+
+    .feature-item__number {
+      font-size: 14px;
+      font-weight: var(--font-weight-regular);
+      line-height: 24px;
+      color: var(--color-feature-number);
+      grid-row: 1;
+      grid-column: 1;
+    }
+
+    .feature-item__title {
+      font-size: 16px;
+      font-weight: var(--font-weight-bold);
+      line-height: 24px;
+      color: var(--color-primary);
+      grid-row: 1;
+      grid-column: 2;
+    }
+
+    .feature-item__desc {
+      font-size: 16px;
+      font-weight: var(--font-weight-light);
+      line-height: 24px;
+      color: #0D0D0D;
+      grid-row: 2;
+      grid-column: 2;
+    }
+
+    .solution-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+    }
+
+    .solution-card {
+      background: var(--color-box-bg);
+      border: 1px solid var(--color-primary);
+      border-radius: 16px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .solution-card__title {
+      font-size: 16px;
+      font-weight: var(--font-weight-bold);
+      line-height: 24px;
+      color: var(--color-primary);
+    }
+
+    .solution-card__body {
+      font-size: 16px;
+      font-weight: var(--font-weight-light);
+      line-height: 24px;
+      color: #0D0D0D;
+    }
+
+    .cs-section--last {
+      padding-bottom: 72px;
+    }
+
+    /* Footer */
+    .footer {
+      height: var(--footer-height);
+      background-color: var(--color-bg);
+      margin-top: auto;
+      width: 100%;
+    }
+
+    .footer__inner {
+      width: var(--content-width);
+      max-width: calc(100% - 48px);
+      height: 100%;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .footer__left {
+      display: flex;
+      align-items: center;
+      gap: var(--footer-link-gap);
+    }
+
+    .footer__back-to-top {
+      font-size: 14px;
+      font-weight: var(--font-weight-regular);
+      line-height: 17px;
+      color: var(--color-text);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .footer__back-to-top:hover {
+      color: var(--color-muted);
+    }
+
+    .footer__back-to-top:active {
+      color: var(--color-primary);
+    }
+
+    .footer__link {
+      font-size: 14px;
+      font-weight: var(--font-weight-regular);
+      line-height: 17px;
+      color: var(--color-text);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .footer__link:hover {
+      color: var(--color-muted);
+    }
+
+    .footer__link:active {
+      color: var(--color-primary);
+      text-decoration: underline;
+    }
+
+    .footer__copyright {
+      font-size: 12px;
+      font-weight: var(--font-weight-regular);
+      line-height: 20px;
+      color: var(--color-muted);
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      :root {
+        --nav-padding-outer: 48px;
+        --nav-padding-inner: 24px;
+      }
+
+      .content,
+      .cs-section,
+      .cs-caption {
+        width: calc(100% - 96px);
+        max-width: 680px;
+      }
+
+      .footer__inner {
+        width: calc(100% - 96px);
+        max-width: 680px;
+      }
+
+      .full-bleed {
+        width: 100vw;
+        max-width: none;
+        position: relative;
+        left: 50%;
+        transform: translateX(-50%);
+        height: 500px;
+        object-fit: cover;
+      }
+    }
+
+    @media (max-width: 768px) {
+      :root {
+        --nav-padding-outer: 24px;
+        --nav-padding-inner: 0px;
+        --gap-nav-links: 8px;
+        --gap-section: 40px;
+      }
+
+      .nav__logo {
+        font-size: 14px;
+      }
+
+      .nav__links {
+        gap: 8px;
+      }
+
+      .nav__links a {
+        font-size: 12px;
+      }
+
+      .content,
+      .cs-section,
+      .cs-caption {
+        width: calc(100% - 48px);
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .back-link {
+        align-self: flex-start;
+      }
+
+      .tags {
+        white-space: normal;
+      }
+
+      .cs-title {
+        font-size: 28px;
+        line-height: 36px;
+        width: 100%;
+        max-width: 100%;
+      }
+
+      .cs-intro,
+      .cs-body,
+      .cs-body p,
+      .cs-body li,
+      .feature-item__desc,
+      .persona-card__list li,
+      .solution-card__body,
+      .insight-card__body,
+      .game-card__body,
+      .outcome-box__text,
+      .outcome-box__list li {
+        font-size: 15px;
+        line-height: 24px;
+      }
+
+      .cs-intro {
+        width: 100%;
+        max-width: 100%;
+      }
+
+      .cs-meta {
+        gap: 24px;
+      }
+
+      .cs-meta__row {
+        flex-direction: column;
+        gap: 24px;
+      }
+
+      .cs-meta__item {
+        width: 100%;
+        max-width: 100%;
+      }
+
+      .cs-section__heading {
+        font-size: 22px;
+        line-height: 28px;
+      }
+
+      .outcome-box {
+        width: 100%;
+        max-width: 100%;
+        padding: 20px;
+      }
+
+      .full-bleed {
+        width: 100vw;
+        margin-left: calc(-50vw + 50%);
+        left: auto;
+        transform: none;
+        height: 300px;
+        object-fit: cover;
+      }
+
+      .insight-grid,
+      .solution-grid,
+      .game-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .persona-card {
+        width: 100%;
+        max-width: 100%;
+      }
+
+      .feature-list,
+      .problem-list {
+        width: 100%;
+      }
+
+      .cs-separator {
+        margin: 32px auto;
+      }
+
+      .full-bleed + .cs-section {
+        margin-top: 40px;
+      }
+
+      .footer__inner {
+        width: 100%;
+        padding: 0 24px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      :root {
+        --logo-letter-spacing: 0.1em;
+      }
+
+      .nav__logo {
+        font-size: 13px;
+      }
+
+      .nav__links a {
+        font-size: 11px;
+      }
+
+      .content,
+      .cs-section,
+      .cs-caption {
+        width: calc(100% - 32px);
+      }
+
+      .cs-title {
+        font-size: 24px;
+        line-height: 32px;
+      }
+
+      .cs-section__heading {
+        font-size: 20px;
+        line-height: 26px;
+      }
+
+      .full-bleed {
+        height: 240px;
+      }
+
+      .footer__inner {
+        width: calc(100% - 32px);
+      }
+    }
+  </style>
+</head>
+<body id="top">
+  <header class="nav">
+    <div class="nav__outer">
+      <div class="nav__inner">
+        <a href="../index.html" class="nav__logo">Jessica K</a>
+        <ul class="nav__links">
+          <li><a href="../index.html" class="nav__link--active">works</a></li>
+          <li><a href="../about.html">about</a></li>
+          <li><a href="https://www.linkedin.com/in/jessicakr/" target="_blank" rel="noopener noreferrer">linkedin</a></li>
+        </ul>
+      </div>
+    </div>
+  </header>
+
+  <div class="page" id="case-study">
+    <div class="content">
+      <a href="../index.html" class="back-link">&larr; home</a>
+      <div class="cs-hero">
+        <p class="tags">product design &bull; ui/ux design &bull; healthcare</p>
+        <h1 class="cs-title">Gpq: Simplifying the process of finding and seeing a doctor</h1>
+        <p class="cs-intro">GPq is a mobile app that helps users find nearby GP clinics, check crowd levels in real time, and hold a queue spot without leaving home, designed during the COVID-19 period to minimise unnecessary exposure.</p>
+
+        <div class="cs-meta">
+          <div class="cs-meta__row">
+            <div class="cs-meta__item">
+              <span class="cs-meta__label">Course</span>
+              <span class="cs-meta__value">Coursera - UX Design Fundamentals</span>
+            </div>
+            <div class="cs-meta__item">
+              <span class="cs-meta__label">My role</span>
+              <span class="cs-meta__value">UX Research, Interaction design, Prototyping</span>
+            </div>
+          </div>
+          <div class="cs-meta__row">
+            <div class="cs-meta__item">
+              <span class="cs-meta__label">Platform</span>
+              <span class="cs-meta__value">Mobile (iOS)</span>
+            </div>
+            <div class="cs-meta__item">
+              <span class="cs-meta__label">Timeline</span>
+              <span class="cs-meta__value">3 weeks (June - July 2020)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <img src="../assets/case-studies/gpq/gpq-hero.png" alt="GPq mobile app mockups showing clinic finder, crowd levels, and queue booking screens" class="full-bleed">
+
+    <section class="cs-section">
+      <div class="cs-section__inner">
+        <p class="cs-section__label">01 overview.</p>
+        <h2 class="cs-section__heading">Context</h2>
+        <div class="cs-body">
+          <p>During the COVID-19 pandemic, visiting a GP clinic carried real risks beyond the illness itself, crowded waiting rooms, prolonged queuing, and the discomfort of leaving home while unwell. For caregivers and working adults, even a short clinic visit meant disrupting routines and exposing themselves or dependants to further risk.</p>
+          <p>This project explored whether a queue management and tele-consultation app could meaningfully reduce those friction points. It was designed as a 3 week coursework project under Coursera's UX Design Fundamentals programme.</p>
+        </div>
+        <p class="quote-block">&ldquo;How might we help people in Singapore manage GP visits more safely and conveniently, so that being unwell doesn't mean hours spent waiting in a clinic?&rdquo;</p>
+      </div>
+      <hr class="cs-separator">
+    </section>
+
+    <section class="cs-section">
+      <div class="cs-section__inner">
+        <p class="cs-section__label">02 user research: qualitative research.</p>
+        <h2 class="cs-section__heading">Qualitative research insights</h2>
+        <div class="cs-body">
+          <p>I conducted interviews with two potential users, using open-ended questions to surface attitudes, habits, and frustrations around GP visits. Responses were organised using an affinity diagram to identify recurring themes.</p>
+          <p>Two personas were built from the findings, representing the distinct contexts and constraints of each user type.</p>
+        </div>
+        <div class="persona-cards">
+          <div class="persona-card">
+            <p class="persona-card__name">Caroline Tan, 34</p>
+            <ul class="persona-card__list">
+              <li>Role: full-time housewife, former office worker</li>
+              <li>Family: married, two children aged 1 and 4</li>
+              <li>Location: heartlands of Singapore</li>
+              <li>Challenge: can't leave toddler unsupervised; mornings entirely taken up by family routines</li>
+            </ul>
+          </div>
+          <div class="persona-card">
+            <p class="persona-card__name">Harriz biz Azmi, 27</p>
+            <ul class="persona-card__list">
+              <li>Role: civil service employee</li>
+              <li>Lifestyle: active; gym and social commitments outside work</li>
+              <li>Location: heartlands of Singapore</li>
+              <li>Challenge: values speed and practicality; dislikes disrupting his routine</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <hr class="cs-separator">
+    </section>
+
+    <section class="cs-section">
+      <div class="cs-section__inner">
+        <p class="cs-section__label">03 identified problems.</p>
+        <h2 class="cs-section__heading">Who we designed this for</h2>
+        <div class="cs-body">
+          <p>Both users shared overlapping frustrations, despite living very different daily lives. The consistent thread was the unpredictability of the clinic experience, and the cost of that uncertainty on time and comfort.</p>
+        </div>
+        <div class="feature-list">
+          <div class="feature-item">
+            <span class="feature-item__number">01</span>
+            <span class="feature-item__title">No way to gauge waiting time before arriving</span>
+            <p class="feature-item__desc">Users couldn't check clinic crowd levels remotely, making it hard to plan when to go.</p>
+          </div>
+          <div class="feature-item">
+            <span class="feature-item__number">02</span>
+            <span class="feature-item__title">Queue number &ne; guaranteed wait estimate</span>
+            <p class="feature-item__desc">Receiving a number didn't mean knowing how long to wait — users still felt compelled to stay on-site.</p>
+          </div>
+          <div class="feature-item">
+            <span class="feature-item__number">03</span>
+            <span class="feature-item__title">Cramped waiting environments</span>
+            <p class="feature-item__desc">Small neighbourhood clinics with limited seating made waiting uncomfortable, especially while unwell.</p>
+          </div>
+          <div class="feature-item">
+            <span class="feature-item__number">04</span>
+            <span class="feature-item__title">Infection exposure risk</span>
+            <p class="feature-item__desc">Sitting alongside other patients heightened concerns about contracting secondary illnesses.</p>
+          </div>
+          <div class="feature-item">
+            <span class="feature-item__number">05</span>
+            <span class="feature-item__title">Caregiving constraints</span>
+            <p class="feature-item__desc">Leaving home while managing dependants, particularly a toddler; added significant stress on top of being unwell.</p>
+          </div>
+          <div class="feature-item">
+            <span class="feature-item__number">06</span>
+            <span class="feature-item__title">General discomfort of going out while sick</span>
+            <p class="feature-item__desc">The act of travelling to a clinic when feeling unwell was itself a barrier to seeking care.</p>
+          </div>
+        </div>
+      </div>
+      <hr class="cs-separator">
+    </section>
+
+    <section class="cs-section">
+      <div class="cs-section__inner">
+        <p class="cs-section__label">04 solution.</p>
+        <h2 class="cs-section__heading">Understanding the real pain point</h2>
+        <div class="cs-body">
+          <p>Rather than eliminating clinic visits, GPq focused on reducing waiting time by allowing patients to queue remotely and travel only when it was time to see the doctor.</p>
+          <p>Give users the ability to check clinic availability, hold a queue spot remotely, and consult a doctor online, so that physical visits only happen when truly necessary, and on the user's own terms.</p>
+        </div>
+        <div class="solution-grid">
+          <div class="solution-card">
+            <p class="solution-card__title">🔍 Clinic finder with live crowd data</p>
+            <p class="solution-card__body">Users can locate nearby GP clinics and see current queue levels before deciding whether to go.</p>
+          </div>
+          <div class="solution-card">
+            <p class="solution-card__title">📲 Remote queue booking</p>
+            <p class="solution-card__body">Secure an appointment slot and wait at home, the app notifies users when their number is approaching.</p>
+          </div>
+          <div class="solution-card">
+            <p class="solution-card__title">🔔 Smart queue notifications</p>
+            <p class="solution-card__body">Push alerts (and optional clinic callback) let users time their departure accurately, removing the need to physically wait on-site.</p>
+          </div>
+          <div class="solution-card">
+            <p class="solution-card__title">🩺 Online video consultation</p>
+            <p class="solution-card__body">For common ailments that don't require physical examination, users can consult a doctor via video call — eliminating the clinic visit entirely.</p>
+          </div>
+        </div>
+      </div>
+      <hr class="cs-separator">
+    </section>
+
+    <section class="cs-section">
+      <div class="cs-section__inner">
+        <p class="cs-section__label">05 user flow.</p>
+        <div class="cs-body">
+          <p>The flow was mapped around two primary paths: queue booking and online consultation. Both user flows start with a clinic search based on the user's location.</p>
+        </div>
+      </div>
+    </section>
+
+    <img src="../assets/case-studies/gpq/gpq-flow.png" alt="GPq user flow diagram showing queue booking and online consultation paths" class="full-bleed full-bleed--section">
+
+    <section class="cs-section">
+      <div class="cs-section__inner">
+        <p class="cs-section__label">06 wireframes.</p>
+        <h2 class="cs-section__heading">Wireframes</h2>
+        <div class="cs-body">
+          <p>Lo-fidelity wireframes were built first to validate information architecture and screen sequence before committing to visual design. Key decisions at this stage centred on the booking confirmation flow and notification settings.</p>
+        </div>
+      </div>
+    </section>
+
+    <img src="../assets/case-studies/gpq/gpq-wireframes.png" alt="GPq lo-fidelity wireframes showing six mobile screen layouts" class="full-bleed full-bleed--section">
+
+    <section class="cs-section cs-section--last">
+      <div class="cs-section__inner">
+        <p class="cs-section__label">07 reflection.</p>
+        <h2 class="cs-section__heading">Reflection</h2>
+        <div class="cs-body">
+          <p>This was one of my first end-to-end UX projects and an important step in developing my design approach. Although the scope was limited, it reinforced key principles that still guide my work today: understanding user needs, prioritising core problems, and making decisions backed by clear rationale.</p>
+          <p>Looking back, I would validate the notification timing through user testing and explore ways to further simplify the tele-consultation flow for users who may be unwell. These opportunities highlight how user feedback can continue to improve the experience beyond the initial design.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <footer class="footer">
+    <div class="footer__inner">
+      <div class="footer__left">
+        <a href="#" class="footer__back-to-top" aria-label="Back to top" onclick="window.scrollTo({ top: 0, behavior: 'smooth' }); return false;">&uarr;</a>
+        <a href="https://www.linkedin.com/in/jessicakr/" class="footer__link" target="_blank" rel="noopener noreferrer">linkedin</a>
+      </div>
+      <p class="footer__copyright">&copy; 2026 Jessica Kr</p>
+    </div>
+  </footer>
+</body>
+</html>
